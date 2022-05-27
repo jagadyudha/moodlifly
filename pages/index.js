@@ -16,7 +16,7 @@ const data = [
   },
   {
     icon: <IoPauseCircleSharp />,
-    name: "Bebas bayar",
+    name: "Gratis",
     desc: "Tes ganggauan kecemasan secara gratis dan efisien ",
   },
 ];
