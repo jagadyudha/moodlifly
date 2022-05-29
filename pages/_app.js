@@ -5,7 +5,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <div className="mx-auto my-10 max-w-6xl px-6 sm:my-20 md:px-24 xl:px-0">
+      <div className="my-10 max-w-7xl mx-auto sm:my-20 xl:px-0">
         <Component {...pageProps} />
       </div>
     </Layout>
