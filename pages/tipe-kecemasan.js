@@ -4,18 +4,27 @@ import Image from "next/image";
 const TipeKecemasan = () => {
   return (
     <section>
-      <h1 className=" font-bold text-4xl text-center mb-10">Tipe Kecemasan</h1>
+      <div className="text-center md:mb-20 mb-12 max-w-lg mx-auto">
+        <h1 className=" font-bold sm:text-5xl text-3xl text-center my-3">
+          Tipe Kecemasan
+        </h1>
+        <p className="text-gray-700">
+          Pentingnya mengetahui tipe-tipe kecemasan sebelum anda melakukan tes
+          kecemasan
+        </p>
+      </div>
       {/*Gangguan Kecemasan Berpisah*/}
-      <div className="flex items-center ">
+      <div className="md:flex flex-none items-center justify-center text-center md:text-left mt-3">
         <Image
           src="/assets/images/berpisah.png"
           alt="berpisah"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
+          objectFit={"cover"}
         />
-        <div className=" ml-16 justify-end">
-          <h2 className=" font-bold text-lg ">Gangguan Kecemasan Berpisah</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:ml-16 ml-0">
+          <h2 className="font-bold text-2xl">Gangguan Kecemasan Berpisah</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Gangguan Kecemasan Berpisah yaitu ketakutan atau kecemasan berlebih
             dan tidak sesuai dengan perkembangan mengenai perpisahan dan
             orang-orang yang memiliki keterikatan dengan individu.
@@ -24,16 +33,17 @@ const TipeKecemasan = () => {
       </div>
 
       {/*Mutisme Selektif*/}
-      <div className="flex items-center flex-row-reverse ">
+      <div className="md:flex flex-none items-center md:flex-row-reverse justify-center text-center md:text-left mt-20 md:mt-0">
         <Image
+          className=" bg-black"
           src="/assets/images/mutisme.png"
           alt="mutisme"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" mr-16 max-w-full">
-          <h2 className=" font-bold text-lg ">Mutisme Selektif</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:mr-16 mr-0 max-w-full">
+          <h2 className=" font-bold text-2xl ">Mutisme Selektif</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Mutisme Selektif pada DSM V diklasifikasikan dalam gangguan
             kecemasan yang memiliki ciri tidak memulai pembicaraan atau merespon
             secara timbal balik ketika diajak berbicara oleh orang lain dalam
@@ -43,16 +53,16 @@ const TipeKecemasan = () => {
       </div>
 
       {/*Gangguan Fobia Spesifik*/}
-      <div className="flex items-center ">
+      <div className="md:flex flex-none items-center justify-center text-center md:text-left my-3 mt-20 md:mt-0">
         <Image
           src="/assets/images/fobia.png"
           alt="fobia"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" ml-16 justify-end">
-          <h2 className=" font-bold text-lg ">Gangguan Fobia Spesifik</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:ml-16 ml-0 justify-end">
+          <h2 className=" font-bold text-2xl ">Gangguan Fobia Spesifik</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Gangguan Fobia Spesifik merupakan gangguan kecemasan dengan ciri
             ketakutan atau kecemasan irrasional , kuat, menetap dan berlebihan
             yang terjadi secara persisten terhadap objek atau situasi tertentu
@@ -63,16 +73,16 @@ const TipeKecemasan = () => {
       </div>
 
       {/*Gangguan Kecemasan Sosial*/}
-      <div className="flex items-center flex-row-reverse ">
+      <div className="md:flex flex-none items-center md:flex-row-reverse justify-center text-center md:text-left my-3 mt-20 md:mt-0">
         <Image
           src="/assets/images/Social Anxiety.png"
           alt="Social Anxiety"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" mr-16 max-w-full">
-          <h2 className=" font-bold text-lg ">Gangguan Kecemasan Sosial</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:mr-16 mr-0 max-w-full">
+          <h2 className=" font-bold text-2xl ">Gangguan Kecemasan Sosial</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Gangguan Kecemasan Sosial yang sebelumnya disebut fobia sosial
             adalah jenis gangguan kecemasan yang ditandai dengan ketakutan yang
             intens, atau kecemasan terhadap situasi sosial pada saat tampil
@@ -85,16 +95,16 @@ const TipeKecemasan = () => {
       </div>
 
       {/*Gangguan Panik*/}
-      <div className="flex items-center ">
+      <div className="md:flex flex-none items-center justify-center text-center md:text-left my-3 mt-20 md:mt-0">
         <Image
           src="/assets/images/panic.png"
           alt="panic"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" ml-16 justify-end">
-          <h2 className=" font-bold text-lg ">Gangguan Panik</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:ml-16 ml-0 justify-end">
+          <h2 className=" font-bold text-2xl ">Gangguan Panik</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Gangguan panik pada DSM-5 dicirikan sebagai serangan panik tak
             terduga dan berulang. Serangan panik adalah gelombang rasa takut
             yang intens atau ketidaknyamanan hebat yang tiba-tiba mencapai
@@ -108,16 +118,16 @@ const TipeKecemasan = () => {
       </div>
 
       {/*Agorafobia*/}
-      <div className="flex items-center flex-row-reverse ">
+      <div className="md:flex flex-none items-center md:flex-row-reverse justify-center text-center md:text-left my-3 mt-20 md:mt-0">
         <Image
           src="/assets/images/agorafobia.png"
           alt="agorafobia"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" mr-16 max-w-full">
-          <h2 className=" font-bold text-lg ">Agorafobia</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:mr-16 mr-0 max-w-full">
+          <h2 className=" font-bold text-2xl ">Agorafobia</h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Agorafobia pada DSM-5 diklasifikasikan sebagai bagian dari gangguan
             kecemasan. Agorafobia ditandai dengan cemas atau takut yang
             berlebihan dan menghindar untuk berada pada tempat terbuka atau
@@ -129,16 +139,18 @@ const TipeKecemasan = () => {
       </div>
 
       {/*GAD*/}
-      <div className="flex items-center ">
+      <div className="md:flex flex-none items-center justify-center text-center md:text-left my-3 mt-20 md:mt-0">
         <Image
           src="/assets/images/gad.png"
           alt="gad"
-          width={300}
-          height={300}
+          width={300 * 1.2}
+          height={300 * 1.2}
         />
-        <div className=" ml-16 justify-end">
-          <h2 className=" font-bold text-lg ">Gangguan Kecemasan Menyeluruh</h2>
-          <p className="max-w-lg my-4 text-sm">
+        <div className=" md:ml-16 ml-0 justify-end">
+          <h2 className=" font-bold text-2xl ">
+            Gangguan Kecemasan Menyeluruh
+          </h2>
+          <p className="max-w-lg my-4 text-md mx-auto">
             Gangguan Kecemasan Menyeluruh pada DSM-5 adalah suatu keadaan
             ketakutan atau kecemasan yang berlebihan, dan menetap
             sekurang-kurangnya selama 6 bulan mengenai sejumlah kejadian atau
