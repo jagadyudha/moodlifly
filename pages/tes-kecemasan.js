@@ -1,7 +1,16 @@
 import RadioButton from "@/components/radio-button";
 import React from "react";
 
-const TesKecemasan = () => {
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.url}/api/gejala`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
+
+const TesKecemasan = ({ data }) => {
   const handleChange = (e) => {
     console.log(e.target.value);
   };
@@ -15,7 +24,15 @@ const TesKecemasan = () => {
           Cobalah untuk tidak memilih jawaban Netral
         </p>
       </div>
-      <RadioButton onChange={handleChange} />
+
+      <div>
+        {data.map((item) => (
+          <div key={item.kd_gejala}>
+            <h3>{item.nama}</h3>
+            <RadioButton onChange={handleChange} />
+          </div>
+        ))}
+      </div>
     </main>
   );
 };
