@@ -35,7 +35,7 @@ const TipeKecemasan = () => {
       {/*Mutisme Selektif*/}
       <div className="md:flex flex-none items-center md:flex-row-reverse justify-center text-center md:text-left mt-20 md:mt-0">
         <Image
-          className=" bg-black"
+          className=""
           src="/assets/images/mutisme.png"
           alt="mutisme"
           width={300 * 1.2}
