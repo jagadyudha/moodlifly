@@ -12,7 +12,7 @@ const TesKecemasan = () => {
           Tes Kecemasan
         </h1>
         <p className="text-gray-700">
-          Cobalah untuk tidak memilih jawaban "Netral"
+          Cobalah untuk tidak memilih jawaban Netral
         </p>
       </div>
       <RadioButton onChange={handleChange} />
