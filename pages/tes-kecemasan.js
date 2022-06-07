@@ -11,9 +11,22 @@ export async function getServerSideProps() {
 }
 
 const TesKecemasan = ({ data }) => {
-  const handleChange = (e) => {
-    console.log(e.target.value);
+  const [userInput, setUserInput] = React.useState();
+  const isComplete = () => {
+    if (userInput) {
+      if (Object.keys(userInput).length >= 49 - 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   };
+
+  const handleSubmit = (e) => {
+    console.log(userInput);
+    e.preventDefault();
+  };
+
   return (
     <main className="mx-auto">
       <div className="text-center md:mb-20 mb-12 max-w-lg mx-auto">
@@ -25,13 +38,35 @@ const TesKecemasan = ({ data }) => {
         </p>
       </div>
 
-      <div>
+      <div className="">
         {data.map((item) => (
-          <div key={item.kd_gejala}>
-            <h3>{item.nama}</h3>
-            <RadioButton onChange={handleChange} />
+          <div key={item.kd_gejala} className="my-20">
+            <h3 className="my-4 md:text-lg text-base max-w-2xl mx-auto text-center font-medium">
+              {item.nama}
+            </h3>
+            <RadioButton
+              onChange={(e) => {
+                setUserInput({
+                  ...userInput,
+                  [`G${item.kd_gejala}`]: parseInt(e.target.value),
+                });
+              }}
+            />
           </div>
         ))}
+
+        <div className="flex justify-center ">
+          {isComplete() ? (
+            <button
+              className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300"
+              onClick={handleSubmit}
+            >
+              Cek Hasil
+            </button>
+          ) : (
+            <p>anda belum mengisi form</p>
+          )}
+        </div>
       </div>
     </main>
   );
