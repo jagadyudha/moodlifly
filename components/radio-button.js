@@ -9,26 +9,26 @@ const RadioButton = ({ onChange }) => {
         <input
           className="w-12 h-12 accent-primary"
           type="radio"
-          value={1}
+          value={4}
           name="gender"
         />
         <input
           className="w-10 h-10 accent-primary"
           type="radio"
-          value={2}
+          value={3}
           name="gender"
         />
-        <input className="w-8 h-8" type="radio" value={3} name="gender" />
+        <input className="w-8 h-8" type="radio" value={2} name="gender" />
         <input
           className="w-10 h-10 accent-purple-600"
           type="radio"
-          value={4}
+          value={1}
           name="gender"
         />
         <input
           className="w-12 h-12 accent-purple-600"
           type="radio"
-          value={5}
+          value={0}
           name="gender"
         />
         <p className=" text-purple-600 hidden md:block font-bold">TIDAK</p>
