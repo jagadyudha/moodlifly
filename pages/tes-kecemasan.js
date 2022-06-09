@@ -1,5 +1,6 @@
 import RadioButton from "@/components/radio-button";
 import React from "react";
+import { IoWarningOutline } from "react-icons/io5";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -90,7 +91,13 @@ const TesKecemasan = ({ data }) => {
                 Cek Hasil
               </button>
             ) : (
-              <p>anda belum mengisi form</p>
+              <div className="px-6 py-4 bg-yellow-300 rounded-md bg-opacity-50  ">
+                <div className=" flex  font-bold">
+                  <IoWarningOutline className=" text-2xl mr-2 " />
+                  Warning!
+                </div>
+                <p className=" mt-5"> Anda belom mengisi form</p>
+              </div>
             )}
           </div>
         </div>
