@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Login = () => {
   return (
-    <div className="">
+    <div>
       <h2 className=" text-center font-bold  text-3xl text-gray-800">
         Selamat Datang
       </h2>
@@ -11,23 +11,30 @@ const Login = () => {
         Silahkan melakukan login
       </p>
 
-      <div className=" max-w-xs mx-auto mt-10 bg-slate-600">
-        <p className=" font-semibold mb-2">Username</p>
-        <form
-          className=" bg-white shadow-md rounded"
-          action="submit.php"
-          method="POST"
-        >
+      <div className=" mt-10 font-medium flex justify-center ">
+        <label className="block">
+          <span className="text-gray-700 mb-3">Username</span>
           <input
-            className=" bg-white shadow-md rounded"
-            type="text"
-            name="username"
+            type="username"
+            className="form-input mt-1 mb-5 block w-52 shadow-sm border border-opacity-20 rounded-md border-gray-700 p-1"
+            placeholder="enter your name"
           />
-        </form>
-        <p className=" font-semibold mt-4 mb-2">Password</p>
-        <form action="submit.php" method="POST">
-          <input type="text" name="password" />
-        </form>
+
+          <span className="text-gray-700 mb-3">Password</span>
+          <input
+            type="username"
+            className="form-input mt-1 block w-52 shadow-sm border border-opacity-20 rounded-md border-gray-700 p-1 "
+            placeholder="*************"
+          />
+        </label>
+      </div>
+      <div className=" flex justify-center mt-8">
+        <button className=" bg-primary rounded-md text-white  w-24 p-1 mr-3 hover:opacity-80 transition-all duration-300">
+          Login
+        </button>
+        <button className="bg-white rounded-md text-primary border border-primary w-24 p-1 mr-3 hover:opacity-80 transition-all duration-300">
+          Register
+        </button>
       </div>
     </div>
   );
