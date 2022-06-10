@@ -35,7 +35,7 @@ const Navbar = () => {
           <Link href={"/"}>
             <a>
               <Image
-                src="/assets/images/MOODLIFLY.png"
+                src="/assets/images/MOODLIFY.png"
                 alt="Social"
                 width={133}
                 height={29}

@@ -21,6 +21,8 @@ const TesKecemasan = ({ data }) => {
   //hasil perhitungan naive bayes
   const [result, setResult] = React.useState(null);
 
+  console.log(result);
+
   //check bahwa data terisi semua
   const isComplete = () => {
     if (userInput) {
@@ -91,7 +93,7 @@ const TesKecemasan = ({ data }) => {
                 Cek Hasil
               </button>
             ) : (
-              <div className="px-6 py-4 bg-yellow-300 rounded-md bg-opacity-50  ">
+              <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
                 <div className=" flex  font-bold">
                   <IoWarningOutline className=" text-2xl mr-2 " />
                   Warning!
@@ -102,8 +104,6 @@ const TesKecemasan = ({ data }) => {
           </div>
         </div>
       </main>
-
-      <div>hallo</div>
     </>
   );
 };
