@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase";
+
 export default async function handler(req, res) {
   const headers = new Headers();
   headers.set("Accept", "application/json");
@@ -15,6 +17,16 @@ export default async function handler(req, res) {
     );
 
     const result = await response.json();
-    return res.status(200).json(result);
+
+    if (result) {
+      const { data, error } = await supabase
+        .from("penyakit")
+        .select("*")
+        .eq("kd_penyakit", result[1].prediction)
+        .single();
+      res.status(200).json(data);
+    } else {
+      res.status(200).json({ status: "error" });
+    }
   }
 }
