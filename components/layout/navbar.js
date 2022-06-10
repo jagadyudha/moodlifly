@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`px-20 py-5 border-b border-black border-opacity-10 top-0 sticky bg-white z-0 backdrop-filter backdrop-blur-md bg-opacity-80 md:block hidden`}
+        className={`px-20 py-5 border-b border-black border-opacity-10 top-0 sticky bg-white z-10 backdrop-filter backdrop-blur-md bg-opacity-80 md:block hidden`}
       >
         <div className=" flex justify-between items-center">
           <Link href={"/"}>

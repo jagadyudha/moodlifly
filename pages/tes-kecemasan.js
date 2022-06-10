@@ -131,8 +131,8 @@ const TesKecemasan = ({ data }) => {
       {result && (
         <>
           <Modal isOpen={true} style={customStyles}>
-            <div className="w-screen mt-52 mx-auto h-screen">
-              <div className=" bg-white mx-5 sm:mx-auto border-black border border-opacity-20 max-w-3xl rounded-lg m-5">
+            <div className="w-screen mx-auto h-screen grid place-items-center">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5  w-1/3">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
@@ -158,7 +158,7 @@ const TesKecemasan = ({ data }) => {
                 </div>
                 <div className=" text-center  text-gray-800">
                   <p className="  mt-6 "> Anda teridentifikasi : </p>
-                  <p className=" mt-2  mb-16"> {result.nama} </p>
+                  <p className=" mt-2  mb-16"> {result.nama}</p>
                 </div>
                 <div className=" flex justify-end mr-5 mb-5">
                   <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
