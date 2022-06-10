@@ -1,6 +1,9 @@
 import RadioButton from "@/components/radio-button";
 import React from "react";
-import { IoWarningOutline } from "react-icons/io5";
+import { IoWarningOutline, IoCloseOutline } from "react-icons/io5";
+import { AiOutlineLoading } from "react-icons/ai";
+import Image from "next/image";
+import Modal from "react-modal";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -19,14 +22,15 @@ const TesKecemasan = ({ data }) => {
   });
 
   //hasil perhitungan naive bayes
-  const [result, setResult] = React.useState(null);
+  const [result, setResult] = React.useState(false);
 
-  console.log(result);
+  //Loading hasil
+  const [loading, setLoading] = React.useState(false);
 
   //check bahwa data terisi semua
   const isComplete = () => {
     if (userInput) {
-      if (Object.keys(userInput).length >= 49 - 1) {
+      if (Object.keys(userInput).length >= 51) {
         return true;
       } else {
         return false;
@@ -36,6 +40,7 @@ const TesKecemasan = ({ data }) => {
 
   //on submit
   const handleSubmit = async (e) => {
+    setLoading(true);
     const headers = new Headers();
     headers.set("Accept", "application/json");
     headers.set("Access-Control-Allow-Credentials", "true");
@@ -51,8 +56,22 @@ const TesKecemasan = ({ data }) => {
     const result = await response.json();
     if (result) {
       setResult(result);
+      setLoading(false);
     }
-    // e.preventDefault();
+    e.preventDefault();
+  };
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "rgb(0, 0, 0, 0.5)",
+      overlay: { zIndex: "50" },
+    },
   };
 
   return (
@@ -76,8 +95,8 @@ const TesKecemasan = ({ data }) => {
               <RadioButton
                 onChange={(e) => {
                   setUserInput({
-                    [`G${item.kd_gejala}`]: e.target.value,
                     ...userInput,
+                    [`G${item.kd_gejala}`]: e.target.value,
                   });
                 }}
               />
@@ -87,10 +106,13 @@ const TesKecemasan = ({ data }) => {
           <div className="flex justify-center ">
             {isComplete() ? (
               <button
-                className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300"
+                className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
                 onClick={handleSubmit}
               >
                 Cek Hasil
+                {loading && (
+                  <AiOutlineLoading className="ml-2 text-white text-2xl animate-spin" />
+                )}
               </button>
             ) : (
               <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
@@ -104,6 +126,50 @@ const TesKecemasan = ({ data }) => {
           </div>
         </div>
       </main>
+
+      {/* Hasil */}
+      {result && (
+        <>
+          <Modal isOpen={true} style={customStyles}>
+            <div className="w-screen mt-52 mx-auto h-screen">
+              <div className=" bg-white mx-5 sm:mx-auto border-black border border-opacity-20 max-w-3xl rounded-lg m-5">
+                <div className=" flex justify-between mt-5 ml-5 mr-5">
+                  <Image
+                    src="/assets/images/MOODLIFY.png"
+                    alt="Social"
+                    width={133 / 1.2}
+                    height={29 / 1.2}
+                    objectFit="contain"
+                  />
+                  <button onClick={() => setResult(null)}>
+                    <IoCloseOutline className=" text-2xl" />
+                  </button>
+                </div>
+                <p className=" text-xl text-gray-800 text-center mt-8 font-semibold">
+                  Hi Tutut Anjarsari
+                </p>
+                <div className=" flex justify-center mt-6">
+                  <Image
+                    src="/assets/images/Social.png"
+                    alt="Social"
+                    width={479 / 3}
+                    height={455 / 3}
+                  />
+                </div>
+                <div className=" text-center  text-gray-800">
+                  <p className="  mt-6 "> Anda teridentifikasi : </p>
+                  <p className=" mt-2  mb-16"> {result.nama} </p>
+                </div>
+                <div className=" flex justify-end mr-5 mb-5">
+                  <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
+                    Print
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Modal>
+        </>
+      )}
     </>
   );
 };
