@@ -4,6 +4,7 @@ import { IoWarningOutline, IoCloseOutline } from "react-icons/io5";
 import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -74,6 +75,8 @@ const TesKecemasan = ({ data }) => {
     },
   };
 
+  const router = useRouter();
+
   return (
     <>
       <main className="mx-auto">
@@ -88,7 +91,7 @@ const TesKecemasan = ({ data }) => {
 
         <div className="">
           {data.map((item) => (
-            <div key={item.kd_gejala} className="my-20">
+            <div id={item.kd_gejala} key={item.kd_gejala} className="my-20">
               <h3 className="my-4 md:text-lg text-base max-w-2xl mx-auto text-center font-medium">
                 {item.nama}
               </h3>
@@ -98,6 +101,8 @@ const TesKecemasan = ({ data }) => {
                     ...userInput,
                     [`G${item.kd_gejala}`]: e.target.value,
                   });
+
+                  router.push(`#${item.kd_gejala + 1}`);
                 }}
               />
             </div>

@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 const dataLink = [
+  { name: "Beranda", href: "/" },
   { name: "Tes Kecemasan", href: "/tes-kecemasan" },
+  { name: "Artikel", href: "/artikel" },
   { name: "Tipe Kecemasan", href: "/tipe-kecemasan" },
-  { name: "Relaksasi", href: "/relaksasi" },
-  { name: "Login", href: "/login" },
 ];
 
 const Navbar = () => {
-  const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -49,16 +47,24 @@ const Navbar = () => {
                 <a className=" hover:text-primary">{item.name}</a>
               </Link>
             ))}
+            <Link href={"/login"}>
+              <a>
+                <button className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300">
+                  Masuk
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </nav>
 
+      {/* navbar untuk mobile */}
       <nav className="md:hidden block">
         <div className="flex justify-between py-6 px-6 text-black">
           <Link href={"/"}>
             <a>
               <Image
-                src="/assets/images/MOODLIFLY.png"
+                src="/assets/images/MOODLIFY.png"
                 alt="Social"
                 width={133 / 1.1}
                 height={29 / 1.1}
@@ -97,6 +103,13 @@ const Navbar = () => {
                 </a>
               </Link>
             ))}
+            <Link href={"/login"}>
+              <a>
+                <button className="text-primary my-10 rounded-full border border-primary w-full py-3 hover:opacity-50 transition duration-300">
+                  Masuk
+                </button>
+              </a>
+            </Link>
           </div>
         )}
       </nav>

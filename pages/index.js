@@ -49,7 +49,7 @@ const Home = () => {
             <Link href={"/tes-kecemasan"}>
               <a>
                 <button className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300">
-                  Memulai
+                  Ikuti Tes
                 </button>
               </a>
             </Link>
@@ -75,10 +75,10 @@ const Home = () => {
             fitur kami anda dapat melakukan tes secara gratis.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-14 gap-9 content-center max-w-5xl mx-auto my-10 md:my-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-10 gap-9 content-center max-w-6xl mx-auto my-10 md:my-20">
           {data.map((item, index) => (
             <div
-              className="border border-black border-opacity-10 py-10 rounded-lg shadow-lg"
+              className="border border-black border-opacity-10 py-10 rounded-lg"
               key={index}
             >
               <div className="text-2xl mx-auto flex justify-center">
