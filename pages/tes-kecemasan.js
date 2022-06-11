@@ -137,7 +137,7 @@ const TesKecemasan = ({ data }) => {
         <>
           <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
-              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5  w-1/3">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-3/4">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
