@@ -5,6 +5,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -64,35 +65,49 @@ const TesKecemasan = ({ data }) => {
 
   const customStyles = {
     content: {
+      position: "fixed",
       top: "50%",
       left: "50%",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "rgb(0, 0, 0, 0.5)",
-      overlay: { zIndex: "50" },
+      padding: "0px",
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    },
+    overlay: {
+      zIndex: 1000,
     },
   };
+  console.log(userInput.length);
 
   const router = useRouter();
 
   return (
     <>
       <main className="mx-auto">
-        <div className="text-center md:mb-20 mb-12 max-w-lg mx-auto">
-          <h1 className=" font-bold sm:text-5xl text-3xl text-center my-3">
-            Tes Kecemasan
+        <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
+          <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
+            Tes Kecemasan Gratis
           </h1>
           <p className="text-gray-700">
-            Cobalah untuk tidak memilih jawaban Netral
+            Jadilah diri sendiri dan jawablah dengan jujur untuk hasil yang
+            akurat.
           </p>
         </div>
 
         <div className="">
           {data.map((item) => (
-            <div id={item.kd_gejala} key={item.kd_gejala} className="my-20">
-              <h3 className="my-4 md:text-lg text-base max-w-2xl mx-auto text-center font-medium">
+            <motion.div
+              id={item.kd_gejala}
+              key={item.kd_gejala}
+              className={`my-20 transition-all duration-300 ${
+                item.kd_gejala == Object.keys(userInput).length - 1
+                  ? "opacity-100"
+                  : "opacity-20"
+              }`}
+            >
+              <h3 className="my-4 text-lg sm:text-xl max-w-2xl mx-auto text-center font-medium">
                 {item.nama}
               </h3>
               <RadioButton
@@ -105,13 +120,13 @@ const TesKecemasan = ({ data }) => {
                   router.push(`#${item.kd_gejala + 1}`);
                 }}
               />
-            </div>
+            </motion.div>
           ))}
 
           <div className="flex justify-center ">
             {isComplete() ? (
               <button
-                className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
+                className="bg-primary rounded-full text-white w-full sm:w-fit py-4 sm:py-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
                 onClick={handleSubmit}
               >
                 Cek Hasil
