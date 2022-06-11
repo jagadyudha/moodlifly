@@ -4,7 +4,7 @@ import Image from "next/image";
 const Artikel = () => {
   return (
     <div className="container mx-auto justify-start px-20">
-      <div className="rounded-md shadow-lg overflow-hidden w-72">
+      <div className="rounded-md border border-black border-opacity-20 overflow-hidden w-72">
         <Image
           className=" w-full"
           src="/assets/images/SeparationAnxiety.jpg"
