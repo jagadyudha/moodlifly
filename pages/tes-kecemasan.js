@@ -4,6 +4,7 @@ import { IoWarningOutline, IoCloseOutline } from "react-icons/io5";
 import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -74,6 +75,8 @@ const TesKecemasan = ({ data }) => {
     },
   };
 
+  const router = useRouter();
+
   return (
     <>
       <main className="mx-auto">
@@ -88,7 +91,7 @@ const TesKecemasan = ({ data }) => {
 
         <div className="">
           {data.map((item) => (
-            <div key={item.kd_gejala} className="my-20">
+            <div id={item.kd_gejala} key={item.kd_gejala} className="my-20">
               <h3 className="my-4 md:text-lg text-base max-w-2xl mx-auto text-center font-medium">
                 {item.nama}
               </h3>
@@ -98,6 +101,8 @@ const TesKecemasan = ({ data }) => {
                     ...userInput,
                     [`G${item.kd_gejala}`]: e.target.value,
                   });
+
+                  router.push(`#${item.kd_gejala + 1}`);
                 }}
               />
             </div>
@@ -131,8 +136,8 @@ const TesKecemasan = ({ data }) => {
       {result && (
         <>
           <Modal isOpen={true} style={customStyles}>
-            <div className="w-screen mt-52 mx-auto h-screen">
-              <div className=" bg-white mx-5 sm:mx-auto border-black border border-opacity-20 max-w-3xl rounded-lg m-5">
+            <div className="w-screen mx-auto h-screen grid place-items-center">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5  w-1/3">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
@@ -158,7 +163,7 @@ const TesKecemasan = ({ data }) => {
                 </div>
                 <div className=" text-center  text-gray-800">
                   <p className="  mt-6 "> Anda teridentifikasi : </p>
-                  <p className=" mt-2  mb-16"> {result.nama} </p>
+                  <p className=" mt-2  mb-16"> {result.nama}</p>
                 </div>
                 <div className=" flex justify-end mr-5 mb-5">
                   <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
