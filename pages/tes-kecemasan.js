@@ -5,7 +5,6 @@ import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -98,10 +97,10 @@ const TesKecemasan = ({ data }) => {
 
         <div className="">
           {data.map((item) => (
-            <motion.div
+            <div
               id={item.kd_gejala}
               key={item.kd_gejala}
-              className={`my-20 transition-all duration-300 ${
+              className={`my-20 duration-300 ${
                 item.kd_gejala == Object.keys(userInput).length - 1
                   ? "opacity-100"
                   : "opacity-20"
@@ -120,7 +119,7 @@ const TesKecemasan = ({ data }) => {
                   router.push(`#${item.kd_gejala + 1}`);
                 }}
               />
-            </motion.div>
+            </div>
           ))}
 
           <div className="flex justify-center ">
