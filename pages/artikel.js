@@ -1,29 +1,37 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const Artikel = () => {
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.url}/api/artikel`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
+
+const Artikel = ({ data }) => {
   return (
-    <div className="container mx-auto justify-start px-20">
-      <div className="rounded-md border border-black border-opacity-20 overflow-hidden w-72">
-        <Image
-          className=" w-full"
-          src="/assets/images/SeparationAnxiety.jpg"
-          alt="Separation "
-          width={479}
-          height={455}
-        />
-        <div className="px-6 py-4">
-          <h1 className=" font-semibold text-sm mb-2 text-gray-800">
-            Tak Hanya Anak, Separation Anxiety Juga Terjadi pada Orang Dewasa
-          </h1>
-          <p className="mt-5 text-xs text-gray-600">
-            Umumnya separation anxiety akan terjadi pada anak bayi hingga usia
-            tiga tahun. Fase tersebut pun wajar terjadi dalam masa pertumbuhan
-            anak. Namun ternyata, fase satu inipun juga bisa terjadi pada orang
-            dewasa, lho
-          </p>
+    <div className=" grid grid-cols-1  md:grid-cols-3 sm:grid-cols-2 gap-14 max-w-6xl mx-auto content-center ">
+      {data.map((item) => (
+        <div id={item.id} key={item.id}>
+          <Link href={item.artikel}>
+            <div className="rounded-md border border-black border-opacity-20 ">
+              <img
+                className=" w-full h-64 hover:opacity-60"
+                src={item.gambar}
+              />
+              <div className="px-6 py-4">
+                <h1 className=" font-bold text-xl mb-2 text-gray-800">
+                  {item.judul}
+                </h1>
+                <p className="mt-5 text-sm text-gray-600">{item.deskripsi}</p>
+              </div>
+            </div>
+          </Link>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
