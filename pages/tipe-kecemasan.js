@@ -66,8 +66,11 @@ const TipeKecemasan = () => {
       </div>
 
       <div>
-        {data.map((item) => (
-          <div className="md:flex border p-5 border-black border-opacity-10 mb-5 rounded-md flex-none items-center justify-center text-center md:text-left mt-3">
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className="md:flex border p-5 border-black border-opacity-10 mb-5 rounded-md flex-none items-center justify-center text-center md:text-left mt-3"
+          >
             <Image
               src={item.image}
               alt="berpisah"
