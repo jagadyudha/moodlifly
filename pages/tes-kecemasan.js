@@ -5,7 +5,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-
+import toast, { Toaster } from "react-hot-toast";
 export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/gejala`);
@@ -25,6 +25,9 @@ const TesKecemasan = ({ data }) => {
   //hasil perhitungan naive bayes
   const [result, setResult] = React.useState(false);
 
+  //isr
+  const [isSSR, setIsSSR] = React.useState(true);
+
   //Loading hasil
   const [loading, setLoading] = React.useState(false);
 
@@ -42,6 +45,7 @@ const TesKecemasan = ({ data }) => {
   //on submit
   const handleSubmit = async (e) => {
     setLoading(true);
+    toast.loading("loading...");
     const headers = new Headers();
     headers.set("Accept", "application/json");
     headers.set("Access-Control-Allow-Credentials", "true");
@@ -56,9 +60,12 @@ const TesKecemasan = ({ data }) => {
     });
     const result = await response.json();
     if (result) {
+      toast.dismiss();
+      toast.success("Successfully!");
       setResult(result);
       setLoading(false);
     }
+
     e.preventDefault();
   };
 
@@ -78,12 +85,16 @@ const TesKecemasan = ({ data }) => {
       zIndex: 1000,
     },
   };
-  console.log(userInput.length);
 
   const router = useRouter();
 
+  React.useEffect(() => {
+    setIsSSR(false);
+  }, []);
+
   return (
     <>
+      {!isSSR && <Toaster />}
       <main className="mx-auto">
         <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
           <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
