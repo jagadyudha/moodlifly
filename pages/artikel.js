@@ -13,10 +13,10 @@ export async function getServerSideProps() {
 
 const Artikel = ({ data }) => {
   return (
-    <div className=" grid grid-cols-1  md:grid-cols-3 sm:grid-cols-2 gap-14 max-w-6xl mx-auto content-center ">
+    <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-5 max-w-6xl mx-auto content-center ">
       {data.map((item) => (
         <div id={item.id} key={item.id}>
-          <Link href={item.artikel}>
+          <a href={item.artikel} target="_blank" rel="noopener noreferrer">
             <div className="rounded-md border border-black border-opacity-20 ">
               <img
                 className=" w-full h-64 hover:opacity-60"
@@ -26,10 +26,10 @@ const Artikel = ({ data }) => {
                 <h1 className=" font-bold text-xl mb-2 text-gray-800">
                   {item.judul}
                 </h1>
-                <p className="mt-5 text-sm text-gray-600">{item.deskripsi}</p>
+                <p className="mt-5 text-gray-600">{item.deskripsi}</p>
               </div>
             </div>
-          </Link>
+          </a>
         </div>
       ))}
     </div>
