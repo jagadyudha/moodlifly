@@ -106,7 +106,7 @@ const TesKecemasan = ({ data }) => {
           </p>
         </div>
 
-        <div className="">
+        <div>
           {data.map((item) => (
             <div
               id={item.kd_gejala}
@@ -189,11 +189,6 @@ const TesKecemasan = ({ data }) => {
                 <div className=" text-center  text-gray-800">
                   <p className="  mt-6 "> Anda teridentifikasi : </p>
                   <p className=" mt-2  mb-16"> {result.nama}</p>
-                </div>
-                <div className=" flex justify-end mr-5 mb-5">
-                  <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
-                    Print
-                  </button>
                 </div>
               </div>
             </div>

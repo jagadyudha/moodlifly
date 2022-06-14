@@ -20,7 +20,7 @@ const Login = () => {
         Selamat Datang
       </h2>
       <p className="  text-center text-gray-700 mt-2">
-        Silahkan melakukan login
+        Masukkan username dan password
       </p>
       <div className=" mt-10 font-medium flex justify-center ">
         <label className="block">

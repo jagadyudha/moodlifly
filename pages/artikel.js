@@ -13,26 +13,36 @@ export async function getServerSideProps() {
 
 const Artikel = ({ data }) => {
   return (
-    <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-5 max-w-6xl mx-auto content-center ">
-      {data.map((item) => (
-        <div id={item.id} key={item.id}>
-          <a href={item.artikel} target="_blank" rel="noopener noreferrer">
-            <div className="rounded-md border border-black border-opacity-20 ">
-              <img
-                className=" w-full h-64 hover:opacity-60"
-                src={item.gambar}
-              />
-              <div className="px-6 py-4">
-                <h1 className=" font-bold text-xl mb-2 text-gray-800">
-                  {item.judul}
-                </h1>
-                <p className="mt-5 text-gray-600">{item.deskripsi}</p>
+    <main>
+      <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
+        <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
+          Artikel
+        </h1>
+        <p className="text-gray-700">
+          Beberapa atikel untuk menambah wawasan tentang gangguan kecemasan
+        </p>
+      </div>
+      <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-5 max-w-6xl mx-auto content-center ">
+        {data.map((item) => (
+          <div key={item.id}>
+            <a href={item.artikel} target="_blank" rel="noopener noreferrer">
+              <div className="rounded-md border border-black border-opacity-20 ">
+                <img
+                  className=" w-full h-64 hover:opacity-60 rounded-md"
+                  src={item.gambar}
+                />
+                <div className="px-6 py-4">
+                  <h1 className=" font-bold text-xl mb-2 text-gray-800">
+                    {item.judul}
+                  </h1>
+                  <p className="mt-5 text-gray-600">{item.deskripsi}</p>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-      ))}
-    </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </main>
   );
 };
 
