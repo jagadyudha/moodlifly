@@ -38,7 +38,7 @@ const Navbar = () => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       padding: "0px",
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     overlay: {
       zIndex: 1000,
@@ -134,13 +134,13 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Masuk */}
+      {/* LOGIN */}
       {isMasuk && (
         <>
           <Modal isOpen={true} style={customStyles}>
-            <div className="w-96 ">
-              <div className=" bg-white border-black border rounded-lg">
-                <div className=" flex justify-between mt-5 ml-5 mr-5">
+            <div className="w-screen mx-auto h-screen grid place-items-center">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-[90%]">
+                <div className="flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
                     alt="Social"

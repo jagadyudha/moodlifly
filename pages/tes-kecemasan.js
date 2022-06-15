@@ -6,7 +6,7 @@ import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/gejala`);
   const data = await res.json();
@@ -162,7 +162,7 @@ const TesKecemasan = ({ data }) => {
         <>
           <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
-              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-3/4">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-[90%]">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
