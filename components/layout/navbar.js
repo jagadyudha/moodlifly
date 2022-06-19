@@ -179,6 +179,13 @@ const Navbar = () => {
                   <button className=" bg-primary rounded-md text-white w-32 p-1 mr-3 hover:opacity-80 transition-all duration-300">
                     Login
                   </button>
+                  <Link href={"/register"}>
+                    <a>
+                      <button className=" bg-white rounded-md text-primary border border-primary w-32 p-1 mr-3 hover:opacity-80 transition-all duration-300">
+                        Register
+                      </button>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
