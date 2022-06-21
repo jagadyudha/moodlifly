@@ -1,12 +1,23 @@
 import Layout from "@/components/layout/layout";
 import Router, { useRouter } from "next/router";
 import nprogress from "nprogress";
+import Sidebar from "@/components/layout/sidebar";
 
 import "../styles/globals.css";
 import "../styles/nprogress.css";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, ...appProps }) {
   const router = useRouter();
+
+  // milik dashboard
+  if (appProps.router.pathname.startsWith("/dashboard"))
+    return (
+      <Sidebar key={router.pathname}>
+        <div>
+          <Component {...pageProps} />{" "}
+        </div>
+      </Sidebar>
+    );
 
   Router.events.on("routeChangeStart", nprogress.start);
   Router.events.on("routeChangeError", nprogress.done);
