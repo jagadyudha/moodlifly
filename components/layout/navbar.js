@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import Modal from "react-modal";
+import { supabase } from "@/lib/supabase";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const dataLink = [
   { name: "Beranda", href: "/" },
@@ -13,6 +16,27 @@ const dataLink = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const [user, setUser] = useState(null);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async (form) => {
+    try {
+      const { error } = await supabase.auth.signIn(form);
+      if (error) {
+        throw error;
+      } else {
+        router.reload();
+      }
+    } catch (error) {
+      toast(error.error_description || error.message);
+    }
+  };
+
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -25,6 +49,10 @@ const Navbar = () => {
       });
     }
   }, [isOpen]);
+
+  React.useEffect(() => {
+    setUser(supabase.auth.user());
+  }, []);
 
   const [isMasuk, setisMasuk] = React.useState(false);
 
@@ -69,12 +97,24 @@ const Navbar = () => {
                 <a className=" hover:text-primary">{item.name}</a>
               </Link>
             ))}
-            <button
-              onClick={() => setisMasuk(true)}
-              className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
-            >
-              Masuk
-            </button>
+            {user ? (
+              <button
+                onClick={async () => {
+                  await supabase.auth.signOut();
+                  router.reload();
+                }}
+                className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => setisMasuk(true)}
+                className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
+              >
+                Masuk
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -158,31 +198,57 @@ const Navbar = () => {
                 <p className="  text-center text-gray-700 mt-2">
                   Masukkan email dan password anda
                 </p>
-                <div className=" mt-10 font-medium flex justify-center ">
-                  <label className="block">
-                    <span className="text-gray-700 mb-3">Email</span>
-                    <input
-                      type="Email"
-                      className="form-input mt-1 mb-5 block w-52 shadow-sm border border-opacity-20 rounded-md border-gray-700 p-1"
-                      placeholder="Email"
-                    />
 
-                    <span className="text-gray-700 mb-3">Password</span>
-                    <input
-                      type="Password"
-                      className="form-input mt-1 block w-52 shadow-sm border border-opacity-20 rounded-md border-gray-700 p-1 "
-                      placeholder="*************"
-                    />
-                  </label>
+                <div className=" max-w-xs mx-auto items-center  ">
+                  <div className=" mb-5 mt-5">
+                    <span className="text-gray-700 font-semibold mb-3">
+                      Email
+                    </span>
+                    <div className=" mt-2 ">
+                      <input
+                        type="email"
+                        placeholder="Masukkan email"
+                        className="input w-full shadow-sm border border-opacity-20"
+                        value={form.email}
+                        onChange={(e) =>
+                          setForm({ ...form, email: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className=" mb-5">
+                    <span className="text-gray-700 font-semibold mb-3">
+                      Password
+                    </span>
+                    <div className=" mt-2 ">
+                      <input
+                        type="password"
+                        placeholder="*******"
+                        className="input w-full shadow-sm border border-opacity-20"
+                        value={form.password}
+                        onChange={(e) =>
+                          setForm({ ...form, password: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className=" flex justify-center mt-8 mb-20">
-                  <button className=" bg-primary rounded-md text-white w-32 p-1 mr-3 hover:opacity-80 transition-all duration-300">
+
+                <div className="max-w-xs mx-auto grid grid-cols-2 mb-16 gap-x-4">
+                  <button
+                    class="btn btn-primary text-white w-full"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLogin(form);
+                    }}
+                  >
                     Login
                   </button>
                   <Link href={"/register"}>
                     <a>
-                      <button className=" bg-white rounded-md text-primary border border-primary w-32 p-1 mr-3 hover:opacity-80 transition-all duration-300">
-                        Register
+                      <button class="btn btn-outline btn-primary w-full">
+                        Registrasi
                       </button>
                     </a>
                   </Link>

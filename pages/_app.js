@@ -33,8 +33,8 @@ function MyApp({ Component, pageProps, ...appProps }) {
 
   return (
     <Layout key={router.pathname}>
-      {!isSSR && <Toaster />}
       <div className="mx-auto my-10 max-w-7xl px-6 sm:my-20 md:px-24 xl:px-0">
+        {!isSSR && <Toaster />}
         <Component {...pageProps} />
       </div>
     </Layout>

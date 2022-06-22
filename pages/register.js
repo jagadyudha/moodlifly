@@ -45,15 +45,15 @@ const Register = () => {
     }
   };
 
-  // React.useEffect(() => {
-  //   setSession(supabase.auth.session());
-  // }, []);
+  React.useEffect(() => {
+    setSession(supabase.auth.session());
+  }, []);
 
-  // if (session) {
-  //   router.push("/");
-  // }
+  if (session) {
+    router.push("/");
+  }
 
-  // console.log(session);
+  console.log(session);
 
   return (
     <section>
@@ -85,6 +85,7 @@ const Register = () => {
         </h1>
         <p className="text-gray-700">Gratis, sampai kapanpun.</p>
       </div>
+
       <div className=" max-w-xl mx-auto items-center  ">
         <div className=" mb-5 ">
           <span className="text-gray-700 font-semibold">Nama depan</span>
@@ -185,7 +186,7 @@ const Register = () => {
               handleRegister(form);
             }}
           >
-            Register
+            Registrasi
           </button>
         </div>
       </div>

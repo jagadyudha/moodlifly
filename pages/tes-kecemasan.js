@@ -1,11 +1,13 @@
 import RadioButton from "@/components/radio-button";
-import React from "react";
+import React, { useState } from "react";
 import { IoWarningOutline, IoCloseOutline } from "react-icons/io5";
 import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { supabase } from "@/lib/supabase";
+
 export async function getStaticProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/gejala`);
@@ -16,6 +18,8 @@ export async function getStaticProps() {
 }
 
 const TesKecemasan = ({ data }) => {
+  const [user, setUser] = useState(null);
+
   //masukkan dari user
   const [userInput, setUserInput] = React.useState({
     jenis_gangguan: 1,
@@ -24,9 +28,6 @@ const TesKecemasan = ({ data }) => {
 
   //hasil perhitungan naive bayes
   const [result, setResult] = React.useState(false);
-
-  //isr
-  const [isSSR, setIsSSR] = React.useState(true);
 
   //Loading hasil
   const [loading, setLoading] = React.useState(false);
@@ -89,72 +90,93 @@ const TesKecemasan = ({ data }) => {
   const router = useRouter();
 
   React.useEffect(() => {
-    setIsSSR(false);
+    setUser(supabase.auth.user());
   }, []);
 
   return (
     <>
-      <main className="mx-auto">
-        <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
-          <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
-            Tes Kecemasan Gratis
-          </h1>
-          <p className="text-gray-700">
-            Jadilah diri sendiri dan jawablah dengan jujur untuk hasil yang
-            akurat.
-          </p>
-        </div>
+      {user ? (
+        <main className="mx-auto">
+          <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
+            <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
+              Tes Kecemasan Gratis
+            </h1>
+            <p className="text-gray-700">
+              Jadilah diri sendiri dan jawablah dengan jujur untuk hasil yang
+              akurat.
+            </p>
+          </div>
 
-        <div>
-          {data.map((item) => (
-            <div
-              id={item.kd_gejala}
-              key={item.kd_gejala}
-              className={`my-20 duration-300 ${
-                item.kd_gejala == Object.keys(userInput).length - 1
-                  ? "opacity-100"
-                  : "opacity-20"
-              }`}
-            >
-              <h3 className="my-4 text-lg sm:text-xl max-w-2xl mx-auto text-center font-medium">
-                {item.nama}
-              </h3>
-              <RadioButton
-                onChange={(e) => {
-                  setUserInput({
-                    ...userInput,
-                    [`G${item.kd_gejala}`]: e.target.value,
-                  });
-
-                  router.push(`#${item.kd_gejala + 1}`);
-                }}
-              />
-            </div>
-          ))}
-
-          <div className="flex justify-center ">
-            {isComplete() ? (
-              <button
-                className="bg-primary rounded-full text-white w-full sm:w-fit py-4 sm:py-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
-                onClick={handleSubmit}
+          <div>
+            {data.map((item) => (
+              <div
+                id={item.kd_gejala}
+                key={item.kd_gejala}
+                className={`my-20 duration-300 ${
+                  item.kd_gejala == Object.keys(userInput).length - 1
+                    ? "opacity-100"
+                    : "opacity-20"
+                }`}
               >
-                Cek Hasil
-                {loading && (
-                  <AiOutlineLoading className="ml-2 text-white text-2xl animate-spin" />
-                )}
-              </button>
-            ) : (
-              <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
-                <div className=" flex  font-bold">
-                  <IoWarningOutline className=" text-2xl mr-2 " />
-                  Warning!
-                </div>
-                <p className=" mt-5"> Anda belom mengisi form</p>
+                <h3 className="my-4 text-lg sm:text-xl max-w-2xl mx-auto text-center font-medium">
+                  {item.nama}
+                </h3>
+                <RadioButton
+                  onChange={(e) => {
+                    setUserInput({
+                      ...userInput,
+                      [`G${item.kd_gejala}`]: e.target.value,
+                    });
+
+                    router.push(`#${item.kd_gejala + 1}`);
+                  }}
+                />
               </div>
-            )}
+            ))}
+
+            <div className="flex justify-center ">
+              {isComplete() ? (
+                <button
+                  className="bg-primary rounded-full text-white w-full sm:w-fit py-4 sm:py-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
+                  onClick={handleSubmit}
+                >
+                  Cek Hasil
+                  {loading && (
+                    <AiOutlineLoading className="ml-2 text-white text-2xl animate-spin" />
+                  )}
+                </button>
+              ) : (
+                <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
+                  <div className=" flex  font-bold">
+                    <IoWarningOutline className=" text-2xl mr-2 " />
+                    Warning!
+                  </div>
+                  <p className=" mt-5"> Anda belom mengisi form</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </main>
+      ) : (
+        <div class="alert alert-error shadow-lg max-w-3xl mx-auto">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Silahkan login terlebih dahulu</span>
           </div>
         </div>
-      </main>
+      )}
 
       {/* Hasil */}
       {result && (
