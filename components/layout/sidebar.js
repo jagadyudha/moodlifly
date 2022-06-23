@@ -3,6 +3,8 @@ import Link from "next/link";
 import { IoBagCheckSharp, IoLogOutOutline } from "react-icons/io5";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { FaBook, FaUserCircle } from "react-icons/fa";
+import Image from "next/image";
+import { IoCloseOutline } from "react-icons/io5";
 
 const data = [
   {
@@ -18,7 +20,7 @@ const data = [
   {
     title: "Data Training",
     icon: <FaBook />,
-    href: "/dashboard/data training",
+    href: "/dashboard/datatraining",
   },
   {
     title: "User",
@@ -50,6 +52,16 @@ const Sidebar = ({ children }) => {
           <label for="my-drawer-2" className="drawer-overlay"></label>
 
           <ul className=" menu p-4 overflow-y-auto w-80 text-base-content border ">
+            <div className=" flex justify-between  mb-10 mt-2 ">
+              <Image
+                src="/assets/images/MOODLIFY.png"
+                alt="Social"
+                width={133 / 1.2}
+                height={29 / 1.2}
+                objectFit="contain"
+              />
+              <IoCloseOutline className=" text-2xl " />
+            </div>
             {data.map((item, index) => (
               <li key={index}>
                 <Link href={item.href}>

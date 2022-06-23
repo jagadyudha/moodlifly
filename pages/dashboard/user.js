@@ -4,7 +4,7 @@ import { IoTrashSharp } from "react-icons/io5";
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.url}/api/gejala`);
+  const res = await fetch(`${process.env.url}/api/user`);
   const data = await res.json();
 
   // Pass data to the page via props
@@ -24,17 +24,21 @@ const Gejala = ({ data }) => {
             <thead>
               <tr>
                 <th></th>
-                <th>Kode Gejala</th>
-                <th className="">Gejala</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>Tanggal lahir</th>
+                <th>Jenis Kelamin</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
                 <tr>
-                  <th></th>
-                  <td>{item.kd_gejala}</td>
-                  <td className=" ">{item.nama}</td>
+                  <th>{item.id_user}</th>
+                  <td>{item.nama}</td>
+                  <td>{item.email}</td>
+                  <td>{item.tanggal_lahir}</td>
+                  <td>{item.jenis_kelamin}</td>
                   <td>
                     <button className=" mr-2 text-2xl">
                       <TiPencil />

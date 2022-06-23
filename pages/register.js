@@ -59,16 +59,16 @@ const Register = () => {
     <section>
       {success && (
         <>
-          <div class="modal modal-open">
-            <div class="modal-box">
-              <h3 class="font-bold text-lg">SUKSES REGISTRASI</h3>
-              <p class="py-4">
+          <div className="modal modal-open">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">SUKSES REGISTRASI</h3>
+              <p className="py-4">
                 Silahkan Konfirmasi email dan jangan sampai lupa password
               </p>
-              <div class="modal-action">
+              <div className="modal-action">
                 <label
                   for="my-modal"
-                  class="btn"
+                  className="btn"
                   onClick={() => router.push("/")}
                 >
                   OK

@@ -158,11 +158,11 @@ const TesKecemasan = ({ data }) => {
           </div>
         </main>
       ) : (
-        <div class="alert alert-error shadow-lg max-w-3xl mx-auto">
+        <div className="alert alert-error mb-96 shadow-lg max-w-3xl mx-auto">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="stroke-current flex-shrink-0 h-6 w-6"
+              className="stroke-current flex-shrink-0 h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
             >

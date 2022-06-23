@@ -237,7 +237,7 @@ const Navbar = () => {
 
                 <div className="max-w-xs mx-auto grid grid-cols-2 mb-16 gap-x-4">
                   <button
-                    class="btn btn-primary text-white w-full"
+                    className="btn btn-primary text-white w-full"
                     onClick={(e) => {
                       e.preventDefault();
                       handleLogin(form);
@@ -247,7 +247,7 @@ const Navbar = () => {
                   </button>
                   <Link href={"/register"}>
                     <a>
-                      <button class="btn btn-outline btn-primary w-full">
+                      <button className="btn btn-outline btn-primary w-full">
                         Registrasi
                       </button>
                     </a>
