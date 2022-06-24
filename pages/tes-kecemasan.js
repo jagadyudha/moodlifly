@@ -7,6 +7,8 @@ import Modal from "react-modal";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabase";
+import { FaMobile } from "react-icons/fa";
+import Link from "next/link";
 
 export async function getStaticProps() {
   // Fetch data from external API
@@ -91,6 +93,16 @@ const TesKecemasan = ({ data }) => {
 
   React.useEffect(() => {
     setUser(supabase.auth.user());
+  }, []);
+
+  React.useEffect(() => {
+    const refresh = async () => {
+      await fetch("/api/naive", {
+        method: "GET",
+      });
+    };
+
+    refresh();
   }, []);
 
   return (
@@ -183,7 +195,7 @@ const TesKecemasan = ({ data }) => {
         <>
           <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
-              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-[90%]">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 pb-5 sm:w-1/3 w-[90%]">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
@@ -196,8 +208,8 @@ const TesKecemasan = ({ data }) => {
                     <IoCloseOutline className=" text-2xl" />
                   </button>
                 </div>
-                <p className=" text-xl text-gray-800 text-center mt-8 font-semibold">
-                  Hi Tutut Anjarsari
+                <p className=" text-xl text-gray-800 text-center mt-8 font-semibold capitalize">
+                  {`Hai ${user.user_metadata.nama_depan} ${user.user_metadata.nama_belakang}`}
                 </p>
                 <div className=" flex justify-center mt-6">
                   <Image
@@ -209,7 +221,17 @@ const TesKecemasan = ({ data }) => {
                 </div>
                 <div className=" text-center  text-gray-800">
                   <p className="  mt-6 "> Anda teridentifikasi : </p>
-                  <p className=" mt-2  mb-16"> {result.nama}</p>
+                  <p className=" my-2 "> {result.nama}</p>
+                  {result.kd_penyakit !== 0 && (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={`/tipe-kecemasan#${result.kd_penyakit}`}
+                      className="text-primary hover:underline"
+                    >
+                      Cek penjelasannya disini
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
