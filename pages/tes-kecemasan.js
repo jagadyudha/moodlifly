@@ -7,8 +7,6 @@ import Modal from "react-modal";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabase";
-import { FaMobile } from "react-icons/fa";
-import Link from "next/link";
 
 export async function getStaticProps() {
   // Fetch data from external API
@@ -93,9 +91,7 @@ const TesKecemasan = ({ data }) => {
 
   React.useEffect(() => {
     setUser(supabase.auth.user());
-  }, []);
 
-  React.useEffect(() => {
     const refresh = async () => {
       await fetch("/api/naive", {
         method: "GET",

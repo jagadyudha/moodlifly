@@ -2,7 +2,7 @@ import React from "react";
 import { TiPencil } from "react-icons/ti";
 import { IoTrashSharp } from "react-icons/io5";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/gejala`);
   const data = await res.json();
