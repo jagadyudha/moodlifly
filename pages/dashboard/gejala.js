@@ -19,7 +19,7 @@ const Gejala = ({ data }) => {
 
       <div className="rounded-md ">
         <div className="overflow-x-auto">
-          <table className="table w-full">
+          <table className="table w-full mb-32">
             <thead>
               <tr>
                 <th></th>
@@ -35,10 +35,10 @@ const Gejala = ({ data }) => {
                   <td>{item.kd_gejala}</td>
                   <td className="max-w-sm whitespace-pre-line">{item.nama}</td>
                   <td>
-                    <button className=" mr-2 text-2xl">
+                    <button className=" mr-2 text-2xl btn btn-primary text-white">
                       <TiPencil />
                     </button>
-                    <button className=" text-2xl text-red-500">
+                    <button className=" text-2xl text-white btn btn-error">
                       <IoTrashSharp />
                     </button>
                   </td>

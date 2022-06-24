@@ -60,7 +60,6 @@ const Sidebar = ({ children }) => {
                 height={29 / 1.2}
                 objectFit="contain"
               />
-              <IoCloseOutline className=" text-2xl " />
             </div>
             {data.map((item, index) => (
               <li key={index}>

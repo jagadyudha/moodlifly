@@ -11,16 +11,15 @@ export async function getStaticProps() {
   return { props: { data } };
 }
 const User = ({ data }) => {
-  console.log(data);
   return (
     <section>
       <div className=" md:mb-14 mb-5 p-2">
-        <h1 className=" font-bold sm:text-6xl text-3xl">Gejala</h1>
+        <h1 className=" font-bold sm:text-6xl text-3xl">User</h1>
       </div>
 
       <div className="rounded-md ">
         <div className="overflow-x-auto">
-          <table className="table w-full">
+          <table className="table w-full mb-32">
             <thead>
               <tr>
                 <th></th>
@@ -40,10 +39,10 @@ const User = ({ data }) => {
                   <td>{item.tanggal_lahir}</td>
                   <td>{item.jenis_kelamin}</td>
                   <td>
-                    <button className=" mr-2 text-2xl">
+                    <button className="mr-2 text-2xl btn btn-primary text-white">
                       <TiPencil />
                     </button>
-                    <button className=" text-2xl text-red-500">
+                    <button className="text-2xl text-white btn btn-error">
                       <IoTrashSharp />
                     </button>
                   </td>

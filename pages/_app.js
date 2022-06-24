@@ -17,6 +17,10 @@ function MyApp({ Component, pageProps, ...appProps }) {
     setIsSSR(false);
   }, []);
 
+  Router.events.on("routeChangeStart", nprogress.start);
+  Router.events.on("routeChangeError", nprogress.done);
+  Router.events.on("routeChangeComplete", nprogress.done);
+
   // milik dashboard
   if (appProps.router.pathname.startsWith("/dashboard"))
     return (
@@ -26,10 +30,6 @@ function MyApp({ Component, pageProps, ...appProps }) {
         </div>
       </Sidebar>
     );
-
-  Router.events.on("routeChangeStart", nprogress.start);
-  Router.events.on("routeChangeError", nprogress.done);
-  Router.events.on("routeChangeComplete", nprogress.done);
 
   return (
     <Layout key={router.pathname}>
