@@ -4,13 +4,20 @@ import { IoTrashSharp } from "react-icons/io5";
 
 export async function getStaticProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.url}/api/penyakit`);
+  const res = await fetch(`${process.env.url}/api/datatraining`);
   const data = await res.json();
 
   // Pass data to the page via props
   return { props: { data } };
 }
-const Penyakit = ({ data }) => {
+
+const DataTraining = ({ data }) => {
+  const gejala = [];
+
+  for (let i = 1; i < 49; i++) {
+    gejala.push("G" + i);
+  }
+
   return (
     <section>
       <div className=" md:mb-14 mb-5 p-2">
@@ -22,18 +29,20 @@ const Penyakit = ({ data }) => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
-                <th>Kode Penyakit</th>
-                <th>Penyakit</th>
+                <th>Id</th>
+                {gejala.map((item, index) => (
+                  <th key={index}>{item}</th>
+                ))}
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
-                <tr id={item.kd_penyakit} key={item.kd_penyakit}>
-                  <th></th>
-                  <td>{item.kd_penyakit}</td>
-                  <td>{item.nama}</td>
+                <tr key={item}>
+                  <td>{item.id}</td>
+                  {gejala.map((g, index) => (
+                    <td key={index}>{item[g]}</td>
+                  ))}
                   <td>
                     <button className=" mr-2 text-2xl">
                       <TiPencil />
@@ -52,4 +61,4 @@ const Penyakit = ({ data }) => {
   );
 };
 
-export default Penyakit;
+export default DataTraining;

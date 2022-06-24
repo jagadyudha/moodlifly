@@ -10,7 +10,7 @@ export async function getStaticProps() {
   // Pass data to the page via props
   return { props: { data } };
 }
-const Gejala = ({ data }) => {
+const User = ({ data }) => {
   console.log(data);
   return (
     <section>
@@ -33,7 +33,7 @@ const Gejala = ({ data }) => {
             </thead>
             <tbody>
               {data.map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <th>{item.id_user}</th>
                   <td>{item.nama}</td>
                   <td>{item.email}</td>
@@ -57,4 +57,4 @@ const Gejala = ({ data }) => {
   );
 };
 
-export default Gejala;
+export default User;

@@ -67,7 +67,7 @@ const Register = () => {
               </p>
               <div className="modal-action">
                 <label
-                  for="my-modal"
+                  htmlFor="my-modal"
                   className="btn"
                   onClick={() => router.push("/")}
                 >

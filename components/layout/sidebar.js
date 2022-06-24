@@ -42,14 +42,14 @@ const Sidebar = ({ children }) => {
         <div className="drawer-content flex flex-col items-center justify-center bg-gray-100">
           <div className="w-full h-full p-5 md:p-10"> {children}</div>
           <label
-            for="my-drawer-2"
+            htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button lg:hidden"
           >
             Open drawer
           </label>
         </div>
         <div className="drawer-side">
-          <label for="my-drawer-2" className="drawer-overlay"></label>
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
           <ul className=" menu p-4 overflow-y-auto w-80 text-base-content border ">
             <div className=" flex justify-between  mb-10 mt-2 ">

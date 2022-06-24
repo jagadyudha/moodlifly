@@ -11,7 +11,6 @@ export async function getStaticProps() {
   return { props: { data } };
 }
 const Gejala = ({ data }) => {
-  console.log(data);
   return (
     <section>
       <div className=" md:mb-14 mb-5 p-2">
@@ -31,10 +30,10 @@ const Gejala = ({ data }) => {
             </thead>
             <tbody>
               {data.map((item) => (
-                <tr>
+                <tr id={item.kd_gejala} key={item.kd_gejala}>
                   <th></th>
                   <td>{item.kd_gejala}</td>
-                  <td className=" ">{item.nama}</td>
+                  <td className="max-w-sm whitespace-pre-line">{item.nama}</td>
                   <td>
                     <button className=" mr-2 text-2xl">
                       <TiPencil />
