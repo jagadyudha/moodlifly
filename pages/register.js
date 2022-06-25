@@ -126,6 +126,10 @@ const Register = () => {
               className="w-full shadow-sm border border-opacity-20 rounded-lg p-3"
               selected={form.tanggal_lahir}
               onChange={(date) => setForm({ ...form, tanggal_lahir: date })}
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
             />
           </div>
         </div>
