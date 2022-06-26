@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabase";
+import { BsBoxArrowUpRight } from "react-icons/bs";
 
 export async function getStaticProps() {
   // Fetch data from external API
@@ -223,9 +224,12 @@ const TesKecemasan = ({ data }) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       href={`/tipe-kecemasan#${result.kd_penyakit}`}
-                      className="text-primary hover:underline"
+                      className="text-primary hover:underline flex justify-center mt-5"
                     >
                       Cek penjelasannya disini
+                      <p className=" ml-2 text-xl">
+                        <BsBoxArrowUpRight />
+                      </p>
                     </a>
                   )}
                 </div>
