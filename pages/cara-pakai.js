@@ -47,7 +47,7 @@ const CaraPakai = () => {
         <h2 className=" font-bold text-xl mt-10">3. Hasil</h2>
         <p className=" ml-6 max-w-xl my-3">
           Setelah hasil tes kecemasan keluar, anda bisa mengecek penjelasan
-          tentang penyakit yang anda alami di tombol "Cek penjelasannya disini"
+          tentang penyakit yang anda alami di tombol Cek penjelasannya disini
         </p>
         <div className="ml-6 max-w-xs border-2 ">
           <Image

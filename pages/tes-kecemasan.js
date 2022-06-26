@@ -227,9 +227,9 @@ const TesKecemasan = ({ data }) => {
                       className="text-primary hover:underline flex justify-center mt-5"
                     >
                       Cek penjelasannya disini
-                      <p className=" ml-2 text-xl">
+                      <span className=" ml-2 text-xl">
                         <BsBoxArrowUpRight />
-                      </p>
+                      </span>
                     </a>
                   )}
                 </div>
