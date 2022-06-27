@@ -77,7 +77,7 @@ const Navbar = () => {
     <>
       {/* navbar untuk dekstop */}
       <nav
-        className={`px-20 py-5 border-b border-black border-opacity-10 top-0 sticky bg-white z-10 backdrop-filter backdrop-blur-md bg-opacity-80 md:block hidden`}
+        className={`px-20 py-5 border-b border-black border-opacity-10 top-0 sticky bg-white z-10 backdrop-filter backdrop-blur-md bg-opacity-80 lg:block hidden`}
       >
         <div className=" flex justify-between items-center">
           <Link href={"/"}>
@@ -120,7 +120,7 @@ const Navbar = () => {
       </nav>
 
       {/* navbar untuk mobile */}
-      <nav className="md:hidden block">
+      <nav className="lg:hidden block">
         <div className="flex justify-between py-6 px-6 text-black">
           <Link href={"/"}>
             <a>
