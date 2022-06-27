@@ -8,6 +8,18 @@ import { supabase } from "@/lib/supabase";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
+{
+  /* <button
+onClick={async () => {
+  await supabase.auth.signOut();
+  router.reload();
+}}
+className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
+>
+Profil
+</button> */
+}
+
 const dataLink = [
   { name: "Beranda", href: "/" },
   { name: "Tes Kecemasan", href: "/tes-kecemasan" },
@@ -98,19 +110,13 @@ const Navbar = () => {
               </Link>
             ))}
             {user ? (
-              <button
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  router.reload();
-                }}
-                className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
-              >
-                Logout
-              </button>
+              <Link href="/profil">
+                <button className="btn btn-primary text-white">Profil</button>
+              </Link>
             ) : (
               <button
                 onClick={() => setisMasuk(true)}
-                className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
+                className="btn btn-primary text-white"
               >
                 Masuk
               </button>
@@ -164,12 +170,20 @@ const Navbar = () => {
                 </a>
               </Link>
             ))}
-            <button
-              onClick={() => setisMasuk(true)}
-              className="text-primary my-10 rounded-full border border-primary w-full py-3 hover:opacity-50 transition duration-300"
-            >
-              Masuk
-            </button>
+            {user ? (
+              <Link href="/profil">
+                <button className="btn btn-primary text-white w-full my-10">
+                  Profil
+                </button>
+              </Link>
+            ) : (
+              <button
+                onClick={() => setisMasuk(true)}
+                className="btn btn-primary text-white w-full my-10"
+              >
+                Masuk
+              </button>
+            )}
           </div>
         )}
       </nav>
