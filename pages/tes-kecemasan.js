@@ -111,7 +111,7 @@ const TesKecemasan = ({ data }) => {
             <div
               id={item.kd_gejala}
               key={item.kd_gejala}
-              className={`my-20 duration-300 ${
+              className={`form-gejala scroll-pt-[40vh] my-20 duration-300 ${
                 item.kd_gejala == Object.keys(userInput).length - 1
                   ? "opacity-100"
                   : "opacity-20"
