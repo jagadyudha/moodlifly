@@ -1,4 +1,5 @@
 import React from "react";
+import { BsBoxArrowUpRight } from "react-icons/bs";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -30,8 +31,11 @@ const Artikel = ({ data }) => {
                   src={item.gambar}
                 />
                 <div className="px-6 py-4">
-                  <h1 className=" font-bold text-xl mb-2 text-gray-800">
+                  <h1 className=" flex font-bold text-xl mb-2 text-gray-800  hover:underline">
                     {item.judul}
+                    <span className=" ml-2 text-xl">
+                      <BsBoxArrowUpRight />
+                    </span>
                   </h1>
                   <p className="mt-5 text-gray-600">{item.deskripsi}</p>
                 </div>

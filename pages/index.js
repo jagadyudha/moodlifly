@@ -48,14 +48,14 @@ const Home = () => {
           <div className="flex justify-center lg:justify-start mt-8">
             <Link href={"/tes-kecemasan"}>
               <a>
-                <button className="bg-primary rounded-full text-white  py-2 sm:py-4 px-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300">
+                <button className="btn btn-primary text-white mr-4 w-36">
                   Ikuti Tes
                 </button>
               </a>
             </Link>
             <Link href={"/cara-pakai"}>
               <a>
-                <button className="text-primary rounded-full border border-primary sm:px-8 sm:py-4 py-2 px-4 hover:opacity-50 transition duration-300">
+                <button className="btn btn-outline btn-primary w-36">
                   Cara Pakai
                 </button>
               </a>
