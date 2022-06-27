@@ -13,6 +13,9 @@ module.exports = {
         accent: "#926EA2",
       },
     },
+    fontFamily: {
+      sans: ["Poppins"],
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
