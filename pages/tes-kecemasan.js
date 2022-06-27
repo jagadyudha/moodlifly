@@ -1,12 +1,15 @@
 import RadioButton from "@/components/radio-button";
-import React from "react";
+import React, { useState } from "react";
 import { IoWarningOutline, IoCloseOutline } from "react-icons/io5";
 import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
 import Modal from "react-modal";
 import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
-export async function getServerSideProps() {
+import toast from "react-hot-toast";
+import { supabase } from "@/lib/supabase";
+import { BsBoxArrowUpRight } from "react-icons/bs";
+
+export async function getStaticProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/gejala`);
   const data = await res.json();
@@ -16,6 +19,8 @@ export async function getServerSideProps() {
 }
 
 const TesKecemasan = ({ data }) => {
+  const [user, setUser] = useState(null);
+
   //masukkan dari user
   const [userInput, setUserInput] = React.useState({
     jenis_gangguan: 1,
@@ -24,9 +29,6 @@ const TesKecemasan = ({ data }) => {
 
   //hasil perhitungan naive bayes
   const [result, setResult] = React.useState(false);
-
-  //isr
-  const [isSSR, setIsSSR] = React.useState(true);
 
   //Loading hasil
   const [loading, setLoading] = React.useState(false);
@@ -89,80 +91,108 @@ const TesKecemasan = ({ data }) => {
   const router = useRouter();
 
   React.useEffect(() => {
-    setIsSSR(false);
+    setUser(supabase.auth.user());
+
+    const refresh = async () => {
+      await fetch("/api/naive", {
+        method: "GET",
+      });
+    };
+
+    refresh();
   }, []);
 
   return (
     <>
-      {!isSSR && <Toaster />}
-      <main className="mx-auto">
-        <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
-          <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
-            Tes Kecemasan Gratis
-          </h1>
-          <p className="text-gray-700">
-            Jadilah diri sendiri dan jawablah dengan jujur untuk hasil yang
-            akurat.
-          </p>
-        </div>
+      {user ? (
+        <main className="mx-auto">
+          <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2 ">
+            <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
+              Tes Kecemasan Gratis
+            </h1>
+            <p className="text-gray-700">
+              Jadilah diri sendiri dan jawablah dengan jujur untuk hasil yang
+              akurat.
+            </p>
+          </div>
 
-        <div className="">
-          {data.map((item) => (
-            <div
-              id={item.kd_gejala}
-              key={item.kd_gejala}
-              className={`form-gejala scroll-pt-[40vh] my-20 duration-300 ${
-                item.kd_gejala == Object.keys(userInput).length - 1
-                  ? "opacity-100"
-                  : "opacity-20"
-              }`}
-            >
-              <h3 className="my-4 text-lg sm:text-xl max-w-2xl mx-auto text-center font-medium">
-                {item.nama}
-              </h3>
-              <RadioButton
-                onChange={(e) => {
-                  setUserInput({
-                    ...userInput,
-                    [`G${item.kd_gejala}`]: e.target.value,
-                  });
-
-                  router.push(`#${item.kd_gejala + 1}`);
-                }}
-              />
-            </div>
-          ))}
-
-          <div className="flex justify-center ">
-            {isComplete() ? (
-              <button
-                className="bg-primary rounded-full text-white w-full sm:w-fit py-4 sm:py-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
-                onClick={handleSubmit}
+          <div>
+            {data.map((item) => (
+              <div
+                id={item.kd_gejala}
+                key={item.kd_gejala}
+                className={`my-20 duration-300 ${
+                  item.kd_gejala == Object.keys(userInput).length - 1
+                    ? "opacity-100"
+                    : "opacity-20"
+                }`}
               >
-                Cek Hasil
-                {loading && (
-                  <AiOutlineLoading className="ml-2 text-white text-2xl animate-spin" />
-                )}
-              </button>
-            ) : (
-              <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
-                <div className=" flex  font-bold">
-                  <IoWarningOutline className=" text-2xl mr-2 " />
-                  Warning!
-                </div>
-                <p className=" mt-5"> Anda belom mengisi form</p>
+                <h3 className="my-4 text-lg sm:text-xl max-w-2xl mx-auto text-center font-medium">
+                  {item.nama}
+                </h3>
+                <RadioButton
+                  onChange={(e) => {
+                    setUserInput({
+                      ...userInput,
+                      [`G${item.kd_gejala}`]: e.target.value,
+                    });
+
+                    router.push(`#${item.kd_gejala + 1}`);
+                  }}
+                />
               </div>
-            )}
+            ))}
+
+            <div className="flex justify-center ">
+              {isComplete() ? (
+                <button
+                  className="bg-primary rounded-full text-white w-full sm:w-fit py-4 sm:py-4 sm:px-8 mr-3 hover:opacity-80 transition-all duration-300 flex justify-center items-center"
+                  onClick={handleSubmit}
+                >
+                  Cek Hasil
+                  {loading && (
+                    <AiOutlineLoading className="ml-2 text-white text-2xl animate-spin" />
+                  )}
+                </button>
+              ) : (
+                <div className="px-6 py-4 my-10 bg-yellow-300 rounded-md bg-opacity-50 max-w-2xl  container">
+                  <div className=" flex  font-bold">
+                    <IoWarningOutline className=" text-2xl mr-2 " />
+                    Warning!
+                  </div>
+                  <p className=" mt-5"> Anda belom mengisi form</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </main>
+      ) : (
+        <div className="alert alert-error mb-96 shadow-lg max-w-3xl mx-auto">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Silahkan login terlebih dahulu</span>
           </div>
         </div>
-      </main>
+      )}
 
       {/* Hasil */}
       {result && (
         <>
           <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
-              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-3/4">
+              <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 pb-5 sm:w-1/3 w-[90%]">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
                   <Image
                     src="/assets/images/MOODLIFY.png"
@@ -175,8 +205,8 @@ const TesKecemasan = ({ data }) => {
                     <IoCloseOutline className=" text-2xl" />
                   </button>
                 </div>
-                <p className=" text-xl text-gray-800 text-center mt-8 font-semibold">
-                  Hi Tutut Anjarsari
+                <p className=" text-xl text-gray-800 text-center mt-8 font-semibold capitalize">
+                  {`Hai ${user.user_metadata.nama_depan} ${user.user_metadata.nama_belakang}`}
                 </p>
                 <div className=" flex justify-center mt-6">
                   <Image
@@ -188,12 +218,20 @@ const TesKecemasan = ({ data }) => {
                 </div>
                 <div className=" text-center  text-gray-800">
                   <p className="  mt-6 "> Anda teridentifikasi : </p>
-                  <p className=" mt-2  mb-16"> {result.nama}</p>
-                </div>
-                <div className=" flex justify-end mr-5 mb-5">
-                  <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
-                    Print
-                  </button>
+                  <p className=" my-2 "> {result.nama}</p>
+                  {result.kd_penyakit !== 0 && (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={`/tipe-kecemasan#${result.kd_penyakit}`}
+                      className="text-primary hover:underline flex justify-center mt-5"
+                    >
+                      Cek penjelasannya disini
+                      <span className=" ml-2 text-xl">
+                        <BsBoxArrowUpRight />
+                      </span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

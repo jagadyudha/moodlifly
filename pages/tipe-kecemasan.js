@@ -58,7 +58,7 @@ const TipeKecemasan = () => {
     <section>
       <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
         <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
-          Tipe-tipe Kecemasan
+          Tipe Kecemasan
         </h1>
         <p className="text-gray-700">
           Pentingnya mengetahui tipe-tipe kecemasan sebagai edukasi
@@ -69,7 +69,8 @@ const TipeKecemasan = () => {
         {data.map((item, index) => (
           <div
             key={index}
-            className="md:flex border p-5 border-black border-opacity-10 mb-5 rounded-md flex-none items-center justify-center text-center md:text-left mt-3"
+            id={index + 1}
+            className="max-w-6xl mx-auto md:flex border p-3 border-black border-opacity-20 mb-5 rounded-md flex-none items-center justify-center text-center md:text-left mt-3"
           >
             <Image
               src={item.image}
@@ -79,14 +80,9 @@ const TipeKecemasan = () => {
               objectFit="contain"
             />
             <div className=" md:ml-16 ml-0">
-              <h2 className="font-bold text-2xl">
-                Gangguan Kecemasan Berpisah
-              </h2>
+              <h2 className="font-bold text-2xl">{item.name}</h2>
               <p className="max-w-lg my-4 text-md mx-auto">
-                Gangguan Kecemasan Berpisah yaitu ketakutan atau kecemasan
-                berlebih dan tidak sesuai dengan perkembangan mengenai
-                perpisahan dan orang-orang yang memiliki keterikatan dengan
-                individu.
+                {item.description}
               </p>
             </div>
           </div>

@@ -30,11 +30,6 @@ const Hasil = () => {
         <p className="  mt-6 "> Anda teridentifikasi gangguan : </p>
         <p className=" mt-2  mb-16"> Mutisme Selektif </p>
       </div>
-      <div className=" flex justify-end mr-5 mb-5">
-        <button className="bg-primary rounded-full text-white py-2 px-6 hover:opacity-80 transition-all duration-300">
-          Print
-        </button>
-      </div>
     </div>
   );
 };
