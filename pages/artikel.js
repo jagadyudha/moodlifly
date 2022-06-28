@@ -23,20 +23,20 @@ const Artikel = ({ data }) => {
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-5 max-w-6xl mx-auto content-center ">
         {data.map((item) => (
-          <div key={item.id}>
+          <div
+            key={item.id}
+            className="relative rounded-md border group border-black border-opacity-20 hover:scale-105 transition-all duration-300"
+          >
+            <div className="absolute group right-5 top-5 text-black text-xl rounded-lg bg-white p-2">
+              <BsBoxArrowUpRight />
+            </div>
             <a href={item.artikel} target="_blank" rel="noopener noreferrer">
-              <div className="rounded-md border border-black border-opacity-20 ">
-                <img
-                  className=" w-full h-64 hover:opacity-60 rounded-md"
-                  src={item.gambar}
-                />
+              <div>
+                <img className=" w-full h-64 rounded-md" src={item.gambar} />
                 <div className="px-6 py-4">
-                  <h1 className=" flex font-bold text-xl mb-2 text-gray-800  hover:underline">
+                  <h3 className=" flex font-bold text-xl mb-2 text-gray-800  group-hover:underline">
                     {item.judul}
-                    <span className=" ml-2 text-xl">
-                      <BsBoxArrowUpRight />
-                    </span>
-                  </h1>
+                  </h3>
                   <p className="mt-5 text-gray-600">{item.deskripsi}</p>
                 </div>
               </div>
