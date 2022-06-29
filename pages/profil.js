@@ -2,7 +2,7 @@ import React from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/router";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch data from external API
   const user = supabase.auth.user();
   const { data, error } = await supabase.from("hasil").select(
