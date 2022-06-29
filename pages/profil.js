@@ -55,9 +55,9 @@ const Profil = ({ data }) => {
               .map((item) => (
                 <div
                   key={item.id}
-                  className="py-6 px-10 rounded-xl border border-black border-opacity-20 md:flex md:justify-between  "
+                  className="py-6 px-10 mb-10 rounded-xl border border-black border-opacity-20 md:flex md:justify-between  "
                 >
-                  <div className=" items-center ">
+                  <div className=" items-center">
                     <h2 className=" text-md font-bold mb-1">
                       {item.kd_penyakit.nama}
                     </h2>
