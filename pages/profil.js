@@ -52,9 +52,9 @@ const Profil = ({ data }) => {
           <div className=" max-w-4xl mx-auto">
             {data
               .filter((item) => item.email === user.email)
-              .map((item) => (
+              .map((item, index) => (
                 <div
-                  key={item.id}
+                  key={index}
                   className="py-6 px-10 mb-10 rounded-xl border border-black border-opacity-20 md:flex md:justify-between  "
                 >
                   <div className=" items-center">

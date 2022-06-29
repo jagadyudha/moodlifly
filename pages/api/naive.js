@@ -28,14 +28,12 @@ export default async function handler(req, res) {
     } else {
       res.status(200).json({ status: "error" });
     }
+  } else if (req.method === "GET") {
+    const response = await fetch("https://safe-gorge-08943.herokuapp.com/", {
+      method: "GET",
+    });
+
+    const result = await response;
+    res.status(200).json("ok");
   }
-
-  // else if (req.method === "GET") {
-  //   const response = await fetch("https://safe-gorge-08943.herokuapp.com/", {
-  //     method: "GET",
-  //   });
-
-  //   const result = await response;
-  //   res.status(200).json("ok");
-  // }
 }

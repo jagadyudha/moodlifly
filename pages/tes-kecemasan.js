@@ -97,11 +97,11 @@ const TesKecemasan = ({ data }) => {
 
   React.useEffect(() => {
     setUser(supabase.auth.user());
-
     const refresh = async () => {
-      await fetch("/api/naive", {
+      const response = await fetch("/api/naive", {
         method: "GET",
       });
+      await response.json();
     };
 
     refresh();
