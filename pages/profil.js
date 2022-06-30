@@ -1,6 +1,7 @@
 import React from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -37,19 +38,21 @@ const Profil = ({ data }) => {
             </h1>
             <div className="flex justify-center ">
               <p className="text-gray-700 mr-2">{user.email}</p>
-              <button
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  router.reload();
-                }}
-                className=" text-primary hover:underline font-bold"
-              >
-                Logout
-              </button>
+              <Link href="/">
+                <button
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    router.reload();
+                  }}
+                  className=" text-primary hover:underline font-bold"
+                >
+                  Logout
+                </button>
+              </Link>
             </div>
           </div>
 
-          <div className=" max-w-4xl mx-auto">
+          <div className=" max-w-4xl mx-auto mb-72">
             {data
               .filter((item) => item.email === user.email)
               .map((item, index) => (
