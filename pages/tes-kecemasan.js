@@ -166,7 +166,7 @@ const TesKecemasan = ({ data }) => {
                     <IoWarningOutline className=" text-2xl mr-2 " />
                     Warning!
                   </div>
-                  <p className=" mt-5"> Anda belom mengisi form</p>
+                  <p className=" mt-5"> Anda belum mengisi form</p>
                 </div>
               )}
             </div>
