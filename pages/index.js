@@ -8,7 +8,7 @@ const data = [
   {
     icon: <FaPercentage />,
     name: "Tingkat akurasi",
-    desc: "Nikmati tingkat akurasi hasil diagnosamu di atas 90% ",
+    desc: "Nikmati tingkat akurasi hasil diagnosamu di atas 80% ",
   },
   {
     icon: <IoAlarmSharp />,
