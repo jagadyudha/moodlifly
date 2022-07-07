@@ -63,7 +63,7 @@ const TesKecemasan = ({ data }) => {
     const result = await response.json();
     if (result) {
       toast.dismiss();
-      if (result.kd_penyakit) {
+      if (result) {
         await supabase
           .from("hasil")
           .insert({ kd_penyakit: result.kd_penyakit, email: user.email });
