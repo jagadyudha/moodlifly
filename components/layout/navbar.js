@@ -7,18 +7,7 @@ import Modal from "react-modal";
 import { supabase } from "@/lib/supabase";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-
-{
-  /* <button
-onClick={async () => {
-  await supabase.auth.signOut();
-  router.reload();
-}}
-className="text-primary rounded-full border border-primary sm:px-5 sm:py-1 py-2 px-4 hover:opacity-50 transition duration-300"
->
-Profil
-</button> */
-}
+import { useAuth } from "context/auth";
 
 const dataLink = [
   { name: "Beranda", href: "/" },
@@ -29,8 +18,9 @@ const dataLink = [
 
 const Navbar = () => {
   const router = useRouter();
+  const { user } = useAuth();
+  const [isMasuk, setisMasuk] = React.useState(false);
 
-  const [user, setUser] = useState(null);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -42,7 +32,8 @@ const Navbar = () => {
       if (error) {
         throw error;
       } else {
-        router.reload();
+        setisMasuk(false);
+        toast.success("Berhasil Masuk");
       }
     } catch (error) {
       toast(error.error_description || error.message);
@@ -61,12 +52,6 @@ const Navbar = () => {
       });
     }
   }, [isOpen]);
-
-  React.useEffect(() => {
-    setUser(supabase.auth.user());
-  }, []);
-
-  const [isMasuk, setisMasuk] = React.useState(false);
 
   const customStyles = {
     content: {

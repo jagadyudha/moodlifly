@@ -2,6 +2,8 @@ import React from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useAuth } from "context/auth";
+import toast from "react-hot-toast";
 
 export async function getServerSideProps() {
   // Fetch data from external API
@@ -20,17 +22,17 @@ export async function getServerSideProps() {
 }
 
 const Profil = ({ data }) => {
-  const [user, setUser] = React.useState(null);
+  const { user } = useAuth();
 
   const router = useRouter();
 
-  React.useEffect(() => {
-    setUser(supabase.auth.user());
-  }, []);
+  if (!user) {
+    router.push("/");
+  }
 
   return (
     <>
-      {user ? (
+      {user && (
         <section>
           <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
             <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4 capitalize">
@@ -41,8 +43,9 @@ const Profil = ({ data }) => {
               <Link href="/">
                 <button
                   onClick={async () => {
+                    router.push("/");
                     await supabase.auth.signOut();
-                    router.reload();
+                    toast.success("Berhasil Keluar");
                   }}
                   className=" text-primary hover:underline font-bold"
                 >
@@ -88,25 +91,6 @@ const Profil = ({ data }) => {
               ))}
           </div>
         </section>
-      ) : (
-        <div className="alert alert-error mb-96 shadow-lg max-w-3xl mx-auto">
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current flex-shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>Silahkan login terlebih dahulu</span>
-          </div>
-        </div>
       )}
     </>
   );
