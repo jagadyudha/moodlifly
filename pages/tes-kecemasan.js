@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabase";
 import { BsBoxArrowUpRight } from "react-icons/bs";
+import { useAuth } from "context/auth";
 
 export async function getStaticProps() {
   // Fetch data from external API
@@ -19,7 +20,7 @@ export async function getStaticProps() {
 }
 
 const TesKecemasan = ({ data }) => {
-  const [user, setUser] = useState(null);
+  const { loading: loadingAuth, user } = useAuth();
 
   //masukkan dari user
   const [userInput, setUserInput] = React.useState({
@@ -96,7 +97,6 @@ const TesKecemasan = ({ data }) => {
   const router = useRouter();
 
   React.useEffect(() => {
-    setUser(supabase.auth.user());
     const refresh = async () => {
       const response = await fetch("/api/naive", {
         method: "GET",
@@ -106,6 +106,10 @@ const TesKecemasan = ({ data }) => {
 
     refresh();
   }, []);
+
+  if (loadingAuth) {
+    return <div>asdasd</div>;
+  }
 
   return (
     <>
