@@ -1,7 +1,7 @@
 import React from "react";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch data from external API
   const res = await fetch(`${process.env.url}/api/artikel`);
   const data = await res.json();
