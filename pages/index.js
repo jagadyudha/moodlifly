@@ -27,6 +27,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="lg:flex flex-none md:flex-row-reverse items-center justify-center">
+        <title>MOODLIFY - Beranda</title>
         <div className="flex justify-center">
           <Image
             src="/assets/images/Social.png"

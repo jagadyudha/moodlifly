@@ -5,6 +5,7 @@ import { IoCloseOutline } from "react-icons/io5";
 const Hasil = () => {
   return (
     <div className=" bg-white border-black border max-w-xl  mx-auto rounded-lg">
+      <title>MOODLIFY - Hasil</title>
       <div className=" flex justify-between mt-5 ml-5 mr-5">
         <Image
           src="/assets/images/MOODLIFY.png"

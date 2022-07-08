@@ -6,7 +6,7 @@ import { useAuth } from "context/auth";
 import toast from "react-hot-toast";
 
 export async function getServerSideProps() {
-  // Fetch data from external API
+  // Fetch data from database hasil
   const user = supabase.auth.user();
   const { data, error } = await supabase.from("hasil").select(
     `
@@ -34,6 +34,7 @@ const Profil = ({ data }) => {
     <>
       {user && (
         <section>
+          <title>MOODLIFY - Profil</title>
           <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
             <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4 capitalize">
               {`${user.user_metadata.nama_depan} ${user.user_metadata.nama_belakang}`}
@@ -61,17 +62,18 @@ const Profil = ({ data }) => {
               .map((item, index) => (
                 <div
                   key={index}
-                  className="py-6 px-10 mb-10 rounded-xl border border-black border-opacity-20 md:flex md:justify-between  "
+                  className="py-6 px-10 mb-5 rounded-xl border border-black border-opacity-20 md:flex md:justify-between  "
                 >
                   <div className=" items-center">
                     <h2 className=" text-md font-bold mb-1">
                       {item.kd_penyakit.nama}
                     </h2>
-                    <p className=" text-sm">{`${new Date(
-                      item.tanggal
-                    ).getDate()}-${new Date(
-                      item.tanggal
-                    ).getMonth()}-${new Date(item.tanggal).getFullYear()}`}</p>
+                    <p className=" text-sm flex">
+                      <p className=" mr-1">Tanggal :</p>
+                      {`${new Date(item.tanggal).getDate()}-${new Date(
+                        item.tanggal
+                      ).getMonth()}-${new Date(item.tanggal).getFullYear()}`}
+                    </p>
                   </div>
 
                   <div className=" justify-end flex">

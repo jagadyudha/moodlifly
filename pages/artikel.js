@@ -13,6 +13,7 @@ export async function getServerSideProps() {
 const Artikel = ({ data }) => {
   return (
     <main>
+      <title>MOODLIFY - Artikel</title>
       <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
         <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
           Artikel
