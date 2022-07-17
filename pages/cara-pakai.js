@@ -4,6 +4,7 @@ import Image from "next/image";
 const CaraPakai = () => {
   return (
     <section>
+      <title>MOODLIFY - Cara Pakai</title>
       <div className="text-center md:mb-20 mb-12 max-w-lg mx-auto">
         <h1 className=" font-bold sm:text-5xl text-3xl text-center my-3">
           Cara Pakai

@@ -8,7 +8,7 @@ const data = [
   {
     icon: <FaPercentage />,
     name: "Tingkat akurasi",
-    desc: "Nikmati tingkat akurasi hasil diagnosamu di atas 90% ",
+    desc: "Nikmati tingkat akurasi hasil diagnosamu di atas 80% ",
   },
   {
     icon: <IoAlarmSharp />,
@@ -27,6 +27,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="lg:flex flex-none md:flex-row-reverse items-center justify-center">
+        <title>MOODLIFY - Beranda</title>
         <div className="flex justify-center">
           <Image
             src="/assets/images/Social.png"
