@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useAuth } from "context/auth";
 import toast from "react-hot-toast";
+import { NextSeo } from "next-seo";
 
 export async function getServerSideProps() {
   // Fetch data from database hasil
@@ -32,6 +33,7 @@ const Profil = ({ data }) => {
 
   return (
     <>
+      <NextSeo title="Profil - Moodlify" />
       {user && (
         <section>
           <title>MOODLIFY - Profil</title>
@@ -69,7 +71,7 @@ const Profil = ({ data }) => {
                       {item.kd_penyakit.nama}
                     </h2>
                     <p className=" text-sm flex">
-                      <p className=" mr-1">Tanggal :</p>
+                      <p className=" mr-1">Tanggal Tes:</p>
                       {`${new Date(item.tanggal).getDate()}-${new Date(
                         item.tanggal
                       ).getMonth()}-${new Date(item.tanggal).getFullYear()}`}

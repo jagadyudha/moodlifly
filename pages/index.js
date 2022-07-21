@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaPercentage } from "react-icons/fa";
 import { IoAlarmSharp, IoPauseCircleSharp } from "react-icons/io5";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 const data = [
   {
@@ -25,6 +26,11 @@ const data = [
 const Home = () => {
   return (
     <>
+      <NextSeo
+        title="Moodlify - Test Gangguan Kecemasan Gratis"
+        description="Moodlify adalah tes gangguan kecemasan online gratis yang menentukan apakah Anda menderita gangguan kecemasan umum, gangguan panik, gangguan kecemasan sosial, atau jenis gangguan kecemasan lainnya."
+      />
+
       {/* Hero Section */}
       <section className="lg:flex flex-none md:flex-row-reverse items-center justify-center">
         <title>MOODLIFY - Beranda</title>
