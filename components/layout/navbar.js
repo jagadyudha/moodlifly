@@ -33,10 +33,11 @@ const Navbar = () => {
         throw error;
       } else {
         setisMasuk(false);
+        setIsOpen(false);
         toast.success("Berhasil Masuk");
       }
     } catch (error) {
-      toast(error.error_description || error.message);
+      toast.error(error.error_description || error.message);
     }
   };
 
@@ -53,23 +54,14 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
-  const customStyles = {
-    content: {
-      position: "fixed",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      padding: "0px",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-    },
-    overlay: {
-      zIndex: 1000,
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
-    },
-  };
+  React.useEffect(() => {
+    // handle login modal when user navigate to tipe kecemasan without login
+
+    if (router.pathname === "/tes-kecemasan" && !user) {
+      setisMasuk(true);
+    }
+  }, []);
+
   return (
     <>
       {/* navbar untuk dekstop */}
@@ -111,15 +103,19 @@ const Navbar = () => {
       </nav>
 
       {/* navbar untuk mobile */}
-      <nav className="lg:hidden block">
-        <div className="flex justify-between py-6 px-6 text-black">
+      <nav
+        className={`${
+          isOpen ? "bg-opacity-100" : "bg-opacity-90"
+        } lg:hidden block sticky top-0 z-10 backdrop-filter backdrop-blur-sm bg-white`}
+      >
+        <div className="flex justify-between py-4 px-6 text-black">
           <Link href={"/"}>
             <a>
               <Image
                 src="/assets/images/MOODLIFY.png"
                 alt="Social"
-                width={133 / 1.1}
-                height={29 / 1.1}
+                width={133 / 1.2}
+                height={29 / 1.2}
                 objectFit="contain"
               />
             </a>
@@ -174,9 +170,72 @@ const Navbar = () => {
       </nav>
 
       {/* LOGIN */}
-      {isMasuk && (
-        <>
-          <Modal isOpen={true} style={customStyles}>
+      <>
+        <div class={`modal  ${isMasuk && "modal-open"}`}>
+          <div class="modal-box relative">
+            <button
+              onClick={() => setisMasuk(false)}
+              for="my-modal-3"
+              class="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
+            >
+              ✕
+            </button>
+
+            <Image
+              src="/assets/images/MOODLIFY.png"
+              alt="Social"
+              width={133 / 1.2}
+              height={29 / 1.2}
+              objectFit="contain"
+            />
+
+            <form
+              onSubmit={(e) => {
+                handleLogin(form);
+                e.preventDefault();
+              }}
+              className="my-10 space-y-4"
+            >
+              <div>
+                <span className="label-text">Alamat Email</span>
+                <input
+                  type="email"
+                  placeholder="tutut@gmail.com"
+                  className="input input-bordered w-full"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </div>
+              <div>
+                <span className="label-text">Password</span>
+                <input
+                  type="password"
+                  placeholder="**********"
+                  className="input input-bordered w-full"
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="btn btn-primary text-white w-full"
+                >
+                  Login
+                </button>
+                <span className="my-4 block">
+                  Belum memiliki akun? {` `}
+                  <Link href={"/register"}>
+                    <a className="text-primary">Daftar</a>
+                  </Link>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+        {/* <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
               <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 sm:w-1/3 w-[90%]">
                 <div className="flex justify-between mt-5 ml-5 mr-5">
@@ -198,7 +257,13 @@ const Navbar = () => {
                   Masukkan email dan password anda
                 </p>
 
-                <div className=" max-w-xs mx-auto items-center  ">
+                <form
+                  onSubmit={(e) => {
+                    handleLogin(form);
+                    e.preventDefault();
+                  }}
+                  className=" max-w-xs mx-auto items-center  "
+                >
                   <div className=" mb-5 mt-5">
                     <span className="text-gray-700 font-semibold mb-3">
                       Email
@@ -232,31 +297,27 @@ const Navbar = () => {
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="max-w-xs mx-auto grid grid-cols-2 mb-16 gap-x-4">
-                  <button
-                    className="btn btn-primary text-white w-full"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogin(form);
-                    }}
-                  >
-                    Login
-                  </button>
-                  <Link href={"/register"}>
-                    <a>
-                      <button className="btn btn-outline btn-primary w-full">
-                        Registrasi
-                      </button>
-                    </a>
-                  </Link>
-                </div>
+                  <div className="max-w-xs mx-auto grid grid-cols-2 mb-16 gap-x-4">
+                    <button
+                      type="submit"
+                      className="btn btn-primary text-white w-full"
+                    >
+                      Login
+                    </button>
+                    <Link href={"/register"}>
+                      <a>
+                        <button className="btn btn-outline btn-primary w-full">
+                          Registrasi
+                        </button>
+                      </a>
+                    </Link>
+                  </div>
+                </form>
               </div>
             </div>
-          </Modal>
-        </>
-      )}
+          </Modal> */}
+      </>
     </>
   );
 };
