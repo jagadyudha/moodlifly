@@ -200,9 +200,57 @@ const TesKecemasan = ({ data }) => {
       )}
 
       {/* Hasil */}
-      {result && (
-        <>
-          <Modal isOpen={true} style={customStyles}>
+
+      <>
+        <div class={`modal  ${result && "modal-open"}`}>
+          <div class="modal-box relative">
+            <button
+              onClick={() => setResult(false)}
+              for="my-modal-3"
+              class="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
+            >
+              ✕
+            </button>
+
+            <Image
+              src="/assets/images/MOODLIFY.png"
+              alt="Social"
+              width={133 / 1.2}
+              height={29 / 1.2}
+              objectFit="contain"
+            />
+
+            <p className="text-xl text-gray-800 text-center mt-8 capitalize">
+              {`Hai ${user.user_metadata.nama_depan} ${user.user_metadata.nama_belakang}`}
+            </p>
+            <div className=" flex justify-center mt-6">
+              <Image
+                src="/assets/images/Social.png"
+                alt="Social"
+                width={479 / 3}
+                height={455 / 3}
+              />
+            </div>
+            <div className=" text-center  text-gray-800">
+              <p className="  mt-6 "> Anda teridentifikasi : </p>
+              <p className=" my-2 "> {result.nama}</p>
+              {result.kd_penyakit !== 0 && (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`/tipe-kecemasan#${result.kd_penyakit}`}
+                  className="text-primary hover:underline flex justify-center mt-5"
+                >
+                  Cek penjelasannya disini
+                  <span className=" ml-2 text-xl">
+                    <BsBoxArrowUpRight />
+                  </span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* <Modal isOpen={true} style={customStyles}>
             <div className="w-screen mx-auto h-screen grid place-items-center">
               <div className="bg-white mx-5 sm:mx-auto border-black border border-opacity-20 rounded-lg m-5 pb-5 sm:w-1/3 w-[90%]">
                 <div className=" flex justify-between mt-5 ml-5 mr-5">
@@ -247,9 +295,8 @@ const TesKecemasan = ({ data }) => {
                 </div>
               </div>
             </div>
-          </Modal>
-        </>
-      )}
+          </Modal> */}
+      </>
     </>
   );
 };

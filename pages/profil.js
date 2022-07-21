@@ -9,14 +9,17 @@ import { NextSeo } from "next-seo";
 export async function getServerSideProps() {
   // Fetch data from database hasil
   const user = supabase.auth.user();
-  const { data, error } = await supabase.from("hasil").select(
-    `
+  const { data, error } = await supabase
+    .from("hasil")
+    .select(
+      `
     *,
     kd_penyakit (
       *
     )
   `
-  );
+    )
+    .order("id_hasil", { ascending: false });
 
   // Pass data to the page via props
   return { props: { data } };
@@ -36,7 +39,6 @@ const Profil = ({ data }) => {
       <NextSeo title="Profil - Moodlify" />
       {user && (
         <section>
-          <title>MOODLIFY - Profil</title>
           <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
             <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4 capitalize">
               {`${user.user_metadata.nama_depan} ${user.user_metadata.nama_belakang}`}
