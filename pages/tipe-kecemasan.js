@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { NextSeo } from "next-seo";
 
 const data = [
   {
@@ -56,7 +57,12 @@ const data = [
 const TipeKecemasan = () => {
   return (
     <section>
-      <title>MOODLIFY - Tipe Kecemasan</title>
+      <NextSeo
+        title="Tipe Kecemasan - Moodlify"
+        description="Pentingnya mengetahui tipe-tipe kecemasan sebagai edukasi
+
+        "
+      />
       <div className="text-center md:mb-24 mb-12 max-w-2xl mx-auto p-2">
         <h1 className=" font-bold sm:text-6xl text-3xl text-center my-4">
           Tipe Kecemasan
