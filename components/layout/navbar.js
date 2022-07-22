@@ -171,12 +171,12 @@ const Navbar = () => {
 
       {/* LOGIN */}
       <>
-        <div class={`modal  ${isMasuk && "modal-open"}`}>
-          <div class="modal-box relative">
+        <div className={`modal  ${isMasuk && "modal-open"}`}>
+          <div className="modal-box relative">
             <button
               onClick={() => setisMasuk(false)}
-              for="my-modal-3"
-              class="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
+              htmlFor="my-modal-3"
+              className="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
             >
               ✕
             </button>
