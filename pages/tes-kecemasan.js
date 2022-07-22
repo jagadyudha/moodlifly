@@ -202,12 +202,12 @@ const TesKecemasan = ({ data }) => {
       {/* Hasil */}
 
       <>
-        <div class={`modal  ${result && "modal-open"}`}>
-          <div class="modal-box relative">
+        <div className={`modal  ${result && "modal-open"}`}>
+          <div className="modal-box relative">
             <button
               onClick={() => setResult(false)}
-              for="my-modal-3"
-              class="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
+              htmlFor="my-modal-3"
+              className="btn-ghost border-none text-gray-800 btn-sm btn-circle absolute right-5 top-5"
             >
               ✕
             </button>
